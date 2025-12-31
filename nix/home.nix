@@ -81,20 +81,20 @@
 	home.stateVersion = "23.11";
 	programs.home-manager.enable = true;
 
-# Make windows borderless
-	gtk = {
-		enable = true;
-
-# This targets GTK3 apps
-		gtk3.extraCss = ''
-			headerbar {
-				min-height: 0px;
-padding: 0;
-margin: -100px;
-			}
-		'';
-
-# This targets GTK4/Libadwaita apps
+# # Make windows borderless
+# 	gtk = {
+# 		enable = true;
+#
+# # This targets GTK3 apps
+# 		gtk3.extraCss = ''
+# 			headerbar {
+# 				min-height: 0px;
+# padding: 0;
+# margin: -100px;
+# 			}
+# 		'';
+#
+# # This targets GTK4/Libadwaita apps
 # 		gtk4.extraCss = ''
 # 			headerbar, 
 # 			headerbar.titlebar {
@@ -126,9 +126,11 @@ margin: -100px;
 			disable-user-extensions = false;
 			enabled-extensions = [
 				pkgs.gnomeExtensions.dash-to-panel.extensionUuid
-					pkgs.gnomeExtensions.advanced-alttab-window-switcher.extensionUuid
-					pkgs.gnomeExtensions.desktop-clock.extensionUuid
-					pkgs.gnomeExtensions.just-perfection.extensionUuid
+				pkgs.gnomeExtensions.advanced-alttab-window-switcher.extensionUuid
+				pkgs.gnomeExtensions.desktop-clock.extensionUuid
+				pkgs.gnomeExtensions.just-perfection.extensionUuid
+				# Custom extensions can be added like so
+				"transparent-window@wytchblade.github.com"
 			];
 		};
 		"org/gnome/desktop/interface" = {
