@@ -17,7 +17,7 @@ const Indicator = GObject.registerClass({
         
         // Create icon using custom asset
         this._icon = new St.Icon({
-            gicon: Gio.icon_new_for_string(metadataPath + '/icon.jpg'),
+            gicon: Gio.icon_new_for_string(metadataPath + '/transparent-window-icon.png'),
             style_class: 'system-status-icon',
         });
         this.add_child(this._icon);
