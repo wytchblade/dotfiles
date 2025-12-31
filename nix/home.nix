@@ -27,11 +27,11 @@
 	};
 
 # config for GNOME extensions built from source
-	# home.file.".local/share/gnome-shell/extensions" = {
-	# 	enable = true;
-	# 	recursive = true;
-	# 	source = ../gnome_extensions;
-	# };
+	home.file.".local/share/gnome-shell/extensions" = {
+		enable = true;
+		recursive = true;
+		source = ../gnome_extensions;
+	};
 
 # Symlink gnome-shell-extension-transparent-window to .local/share/gnome-shell/extensions
 # home.file.".local/share/gnome-shell/extensions/transparent-window@qbxdown.github.com" = {
@@ -40,12 +40,12 @@
 #   source = ../gnome_extensions/gnome-shell-extension-transparent-window;
 # };
 
-home.file.".local/share/gnome-shell/extensions/transparent-window@pbxqdown.github.com" = {
-    # Check your metadata.json to confirm if it is 'pbxqdown' or 'qbxdown'
-    source = ../gnome_extensions/gnome-shell-extension-transparent-window;
-    # Default is recursive = false, which is usually preferred for extensions
-    recursive = false; 
-};
+# home.file.".local/share/gnome-shell/extensions/transparent-window@pbxqdown.github.com" = {
+#     # Check your metadata.json to confirm if it is 'pbxqdown' or 'qbxdown'
+#     source = ../extensions/gnome-shell-extension-transparent-window;
+#     # Default is recursive = false, which is usually preferred for extensions
+#     recursive = false; 
+# };
 
 # config for ghostty
 	home.file.".config/ghostty" = {
