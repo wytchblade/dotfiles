@@ -1,0 +1,691 @@
+-- WHhen disabling bars, you need to toggle on these features in the autocmds.lua file:
+
+      -- vim.o.statuscolumn = '%= %{%v:lnum %} %#StatusColumnBorder#▍%s'
+      -- -- set the line number colors each time upon entering a text buffer
+      -- -- vim.cmd('lua require("statuscol").setup()')
+      -- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#2b2b2b', bg = '#80401a' })
+      -- vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'none', bg = '#2b2b2b'})
+      -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#2b2b2b', bg = '#ff6000' })
+
+
+
+
+return{
+  "OXY2DEV/bars.nvim",
+  opts={
+    winbar = false, 
+    ---@type statuscolumn.config
+    statuscolumn = {
+      ignore_filetypes = { "blink-cmp-menu" },
+      ignore_buftypes = { "help" },
+
+      condition = function (buffer)
+        local ft, bt = vim.bo[buffer].ft, vim.bo[buffer].bt;
+
+        if bt == "nofile" and ft == "query" then
+          --- Buffer for `:InspectTree`
+          return false;
+        elseif bt == "nofile" then
+          --- Normal nofile buffer.
+          return false;
+        else
+          return true;
+        end
+      end,
+
+      default = {
+        components = {
+          ---|fS
+
+          -- {
+          --   kind = "empty",
+          --   width = 1,
+          --
+          --   hl = "Normal"
+          -- },
+          -- {
+          --   kind = "folds",
+          --
+          --   close_text = { "󰌶" },
+          --   close_hl = "Color0",
+          --   open_text = { "󱠂" },
+          --   open_hl = { "Color1", "Color2", "Color3", "Color4", "Color5", "Color6", "Color7" },
+          --
+          --   scope_text = "│",
+          --   scope_end_text = "╰",
+          --   scope_merge_text = "├",
+          --
+          --   fill_text = " ",
+          --
+          --   scope_hl = { "Gradient1N2", "Gradient2N2", "Gradient3N2", "Gradient4N2", "Gradient5N2", "Gradient6N2", "Gradient7" },
+          --   scope_end_hl = { "Gradient1N2", "Gradient2N2", "Gradient3N2", "Gradient4N2", "Gradient5N2", "Gradient6N2", "Gradient7" },
+          --   scope_merge_hl = { "Gradient1N2", "Gradient2N2", "Gradient3N2", "Gradient4N2", "Gradient5N2", "Gradient6N2", "Gradient7" },
+          -- },
+          -- {
+          --   kind = "empty",
+          --   width = 1,
+          --   hl = "Normal"
+          -- },
+          -- {
+          --   kind = "lnum",
+          --   mode = 2,
+          --
+          --   -- click = function (_, window)
+          --   --   return window == vim.api.nvim_get_current_win();
+          --   -- end,
+          --
+          --   wrap_markers = "│",
+          --   virt_markers = "│",
+          --
+          --   wrap_hl = {
+          --     "BarsCursorLineNr",
+          --     "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0",
+          --   },
+          --   virt_hl = {
+          --     "BarsCursorLineNr",
+          --     "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0",
+          --   },
+          --   hl = {
+          --     "BarsCursorLineNr",
+          --     "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0",
+          --   }
+          -- },
+          -- {
+          --   kind = "border",
+          --   text = " 󰛿",
+          --   -- hl = {"BarsBorder"},
+          --   hl = {
+          --     "Monoglow", "BorderShadow9", "BorderShadow8"
+          --   },
+          --   -- hl = {"MonoGlow"},
+          --   -- hl = { "Shadow7","Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7", "Shadow7"
+          --   -- }
+          --   -- hl = function (_, window)
+          --   --   ---|fS "Color matching the mode"
+          --   --   if vim.api.nvim_get_current_win() ~= window then
+          --   --     return "Layer2I";
+          --   --   end
+          --   --
+          --   --   local _o = {};
+          --   --   local gr_map = {
+          --   --     default = "StatusColumnBorder",
+          --   --
+          --   --     ["v"] = "Gradient9N%d",
+          --   --     ["V"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["s"] = "Gradient9N%d",
+          --   --     ["S"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["i"] = "Gradient10N%d",
+          --   --     ["ic"] = "Gradient10N%d",
+          --   --     ["ix"] = "Gradient10N%d",
+          --   --
+          --   --     ["R"] = "Gradient8N%d",
+          --   --     ["Rc"] = "Gradient8N%d",
+          --   --
+          --   --     ["c"] = "Gradient4N%d",
+          --   --     ["!"] = "Gradient4N%d",
+          --   --   };
+          --   --
+          --   --   ---@type string
+          --   --   local mode = vim.api.nvim_get_mode().mode;
+          --   --
+          --   --   for g = 0, 4 do
+          --   --     ---@type string
+          --   --     local hl = gr_map[mode] or gr_map.default;
+          --   --
+          --   --     table.insert(_o, string.format(hl, g));
+          --   --   end
+          --   --
+          --   --   return _o;
+          --   --   ---|fE
+          --   -- end
+          -- },
+          {
+            kind = "empty",
+            width = 1,
+            hl = {"MonoGlow"},
+          },
+          {
+            kind = "signs",
+            width = 1,
+            hl ="LineNr",
+            -- hl = function (_, window)
+            --   ---|fS "Color matching the mode"
+            --   if vim.api.nvim_get_current_win() ~= window then
+            --     return "Layer2I";
+            --   end
+            --
+            --   local _o = {};
+            --   local gr_map = {
+            --     default = "StatusColumnBorder",
+            --
+            --     ["v"] = "Gradient9N%d",
+            --     ["V"] = "Gradient7N%d",
+            --     [""] = "Gradient2N%d",
+            --
+            --     ["s"] = "Gradient9N%d",
+            --     ["S"] = "Gradient7N%d",
+            --     [""] = "Gradient2N%d",
+            --
+            --     ["i"] = "Gradient10N%d",
+            --     ["ic"] = "Gradient10N%d",
+            --     ["ix"] = "Gradient10N%d",
+            --
+            --     ["R"] = "Gradient8N%d",
+            --     ["Rc"] = "Gradient8N%d",
+            --
+            --     ["c"] = "Gradient4N%d",
+            --     ["!"] = "Gradient4N%d",
+            --   };
+            --
+            --   ---@type string
+            --   local mode = vim.api.nvim_get_mode().mode;
+            --
+            --   for g = 0, 4 do
+            --     ---@type string
+            --     local hl = gr_map[mode] or gr_map.default;
+            --
+            --     table.insert(_o, string.format(hl, g));
+            --   end
+            --
+            --   return _o;
+            --   ---|fE
+            -- end,
+
+            filter = function (buffer, namespaces, _, _, _, details)
+              ---@type string
+              local mode = vim.api.nvim_get_mode().mode;
+              local name = namespaces[details.ns_id] or "";
+
+              if package.loaded["markview"] and vim.bo[buffer].ft == "markdown" then
+                --- On markdown files when on normal
+                --- mode only show markview signs.
+                if mode == "n" then
+                  return string.match(name, "^markview") ~= nil;
+                else
+                  return true;
+                end
+              elseif package.loaded["helpview"] and vim.bo[buffer].ft == "help" then
+                --- On help files when on normal
+                --- mode only show helpview signs.
+                if mode == "n" then
+                  return string.match(name, "^helpview") ~= nil;
+                else
+                  return true;
+                end
+              else
+                -- if mode == "n" then
+                --   --- On normal mode only show LSP signs.
+                --   return string.match(name, "^vim[%._]lsp") ~= nil;
+                -- elseif vim.list_contains({ "i", "v", "V", "" }, mode) then
+                --   --- On visual mode only show git signs.
+                --   return string.match(name, "^gitsigns") ~= nil;
+                -- end
+
+                return true;
+              end
+            end
+          },
+          -- {
+          --   kind = "border",
+          --   text = " ",
+          --   hl = {
+          --     "BorderShadow10", "BorderShadow9", "BorderShadow8","BorderShadow7", "BorderShadow6","BorderShadow5", "BorderShadow4","BorderShadow3", "BorderShadow2","BorderShadow1", "BorderShadow0","BorderShadow0","BorderShadow0",
+          --   }
+          --   -- hl = {
+          --   --   "invShadow10", "invShadow9", "invShadow8","invShadow7", "invShadow6","invShadow5", "invShadow4","invShadow3", "invShadow2","invShadow1", "invShadow0","invShadow0",
+          --   -- },
+          --   -- hl = function (_, window)
+          --   --   ---|fS "Color matching the mode"
+          --   --   if vim.api.nvim_get_current_win() ~= window then
+          --   --     return "Layer2I";
+          --   --   end
+          --   --
+          --   --   local _o = {};
+          --   --   local gr_map = {
+          --   --     default = "StatusColumnBorder",
+          --   --
+          --   --     ["v"] = "Gradient9N%d",
+          --   --     ["V"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["s"] = "Gradient9N%d",
+          --   --     ["S"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["i"] = "Gradient10N%d",
+          --   --     ["ic"] = "Gradient10N%d",
+          --   --     ["ix"] = "Gradient10N%d",
+          --   --
+          --   --     ["R"] = "Gradient8N%d",
+          --   --     ["Rc"] = "Gradient8N%d",
+          --   --
+          --   --     ["c"] = "Gradient4N%d",
+          --   --     ["!"] = "Gradient4N%d",
+          --   --   };
+          --   --
+          --   --   ---@type string
+          --   --   local mode = vim.api.nvim_get_mode().mode;
+          --   --
+          --   --   for g = 0, 4 do
+          --   --     ---@type string
+          --   --     local hl = gr_map[mode] or gr_map.default;
+          --   --
+          --   --     table.insert(_o, string.format(hl, g));
+          --   --   end
+          --   --
+          --   --   return _o;
+          --   --   ---|fE
+          --   -- end
+          -- },
+          {
+            kind = "lnum",
+            mode = 3,
+
+            click = function (_, window)
+              return window == vim.api.nvim_get_current_win();
+            end,
+
+            wrap_markers = "│",
+            virt_markers = "│",
+
+            wrap_hl = {
+              "MonoGlow",
+            },
+            virt_hl = {
+              "MonoGlow",
+            },
+
+            -- hl = {
+            --   "BarsCursorLineNr",
+            --   "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0",
+            -- },
+            hl = {
+              "BarsCursorLineNr",
+              "Shadow7", "Shadow7", "Shadow7","Shadow7", "Shadow7","Shadow7", "Shadow7","Shadow7", "Shadow7","Shadow7", "Shadow7","Shadow7",
+            },
+          },
+          {
+            kind = "empty",
+            width = 1,
+            hl = {
+              "BorderShadow10", "BorderShadow9", "BorderShadow8","BorderShadow7", "BorderShadow6","BorderShadow5", "BorderShadow4","BorderShadow3", "BorderShadow2","BorderShadow1", "BorderShadow0","BorderShadow0",
+            }
+          },
+          -- {
+          --   kind = "lnum",
+          --   mode = 1,
+          --
+          --   click = function (_, window)
+          --     return window == vim.api.nvim_get_current_win();
+          --   end,
+          --
+          --   wrap_markers = "│",
+          --   virt_markers = "│",
+          --
+          --   wrap_hl = {
+          --     "MonoGlow",
+          --   },
+          --   virt_hl = {
+          --     "MonoGlow",
+          --   },
+          --   -- hl = function (_, window)
+          --   --   ---|fS "Color matching the mode"
+          --   --   if vim.api.nvim_get_current_win() ~= window then
+          --   --     return "Layer2I";
+          --   --   end
+          --   --
+          --   --   local _o = {};
+          --   --   local gr_map = {
+          --   --     default = "StatusColumnBorder",
+          --   --
+          --   --     ["v"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["V"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     [""] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --
+          --   --     ["i"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["ic"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["ix"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --
+          --   --     ["s"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["S"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     [""] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --
+          --   --     ["R"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["Rc"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --
+          --   --     ["c"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --     ["!"] = { "BarsCursorLineNr", "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0", },
+          --   --
+          --   --     -- ["i"] = "Gradient10N%d",
+          --   --     -- ["ic"] = "Gradient10N%d",
+          --   --     -- ["ix"] = "Gradient10N%d",
+          --   --   };
+          --   --
+          --   --   ---@type string
+          --   --   local mode = vim.api.nvim_get_mode().mode;
+          --   --
+          --   --   for g = 0, 4 do
+          --   --     ---@type string
+          --   --     local hl = gr_map[mode] or gr_map.default;
+          --   --
+          --   --     table.insert(_o, string.format(hl, g));
+          --   --   end
+          --   --
+          --   --   return _o;
+          --   --   ---|fE
+          --   -- end
+          --
+          --   hl = {
+          --     "BarsCursorLineNr",
+          --     "Shadow10", "Shadow9", "Shadow8","Shadow7", "Shadow6","Shadow5", "Shadow4","Shadow3", "Shadow2","Shadow1", "Shadow0","Shadow0",
+          --   },
+          -- },
+          -- {
+          --   kind = "border",
+          --   text = " ",
+          --   -- hl = {"BarsBorder"},
+          --   hl = {
+          --     "BorderShadow10", "BorderShadow9", "BorderShadow8","BorderShadow7", "BorderShadow6","BorderShadow5", "BorderShadow4","BorderShadow3", "BorderShadow2","BorderShadow1", "BorderShadow0","BorderShadow0",
+          --   }
+          --   -- hl = {
+          --   --   "invShadow10", "invShadow9", "invShadow8","invShadow7", "invShadow6","invShadow5", "invShadow4","invShadow3", "invShadow2","invShadow1", "invShadow0","invShadow0",
+          --   -- },
+          --   -- hl = function (_, window)
+          --   --   ---|fS "Color matching the mode"
+          --   --   if vim.api.nvim_get_current_win() ~= window then
+          --   --     return "Layer2I";
+          --   --   end
+          --   --
+          --   --   local _o = {};
+          --   --   local gr_map = {
+          --   --     default = "StatusColumnBorder",
+          --   --
+          --   --     ["v"] = "Gradient9N%d",
+          --   --     ["V"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["s"] = "Gradient9N%d",
+          --   --     ["S"] = "Gradient7N%d",
+          --   --     [""] = "Gradient2N%d",
+          --   --
+          --   --     ["i"] = "Gradient10N%d",
+          --   --     ["ic"] = "Gradient10N%d",
+          --   --     ["ix"] = "Gradient10N%d",
+          --   --
+          --   --     ["R"] = "Gradient8N%d",
+          --   --     ["Rc"] = "Gradient8N%d",
+          --   --
+          --   --     ["c"] = "Gradient4N%d",
+          --   --     ["!"] = "Gradient4N%d",
+          --   --   };
+          --   --
+          --   --   ---@type string
+          --   --   local mode = vim.api.nvim_get_mode().mode;
+          --   --
+          --   --   for g = 0, 4 do
+          --   --     ---@type string
+          --   --     local hl = gr_map[mode] or gr_map.default;
+          --   --
+          --   --     table.insert(_o, string.format(hl, g));
+          --   --   end
+          --   --
+          --   --   return _o;
+          --   --   ---|fE
+          --   -- end
+          -- },
+          {
+            kind = "empty",
+            width = 1,
+            hl = {
+              "BorderShadow10", "BorderShadow9", "BorderShadow8","BorderShadow7", "BorderShadow6","BorderShadow5", "BorderShadow4","BorderShadow3", "BorderShadow2","BorderShadow1", "BorderShadow0","BorderShadow0",
+            }
+          },
+          {
+            kind = "border",
+            text = "▍",
+            hl = {"BarsBorder"},
+            -- hl = {
+            --   "BorderShadow10", "BorderShadow9", "BorderShadow8","BorderShadow7", "BorderShadow6","BorderShadow5", "BorderShadow4","BorderShadow3", "BorderShadow2","BorderShadow1", "BorderShadow0","BorderShadow0","BorderShadow0",
+            -- }
+            -- hl = function (_, window)
+            --   ---|fS "Color matching the mode"
+            --   if vim.api.nvim_get_current_win() ~= window then
+            --     return "Layer2I";
+            --   end
+            --
+            --   local _o = {};
+            --   local gr_map = {
+            --     default = "StatusColumnBorder",
+            --
+            --     ["v"] = "Gradient9N%d",
+            --     ["V"] = "Gradient7N%d",
+            --     [""] = "Gradient2N%d",
+            --
+            --     ["s"] = "Gradient9N%d",
+            --     ["S"] = "Gradient7N%d",
+            --     [""] = "Gradient2N%d",
+            --
+            --     ["i"] = "Gradient10N%d",
+            --     ["ic"] = "Gradient10N%d",
+            --     ["ix"] = "Gradient10N%d",
+            --
+            --     ["R"] = "Gradient8N%d",
+            --     ["Rc"] = "Gradient8N%d",
+            --
+            --     ["c"] = "Gradient4N%d",
+            --     ["!"] = "Gradient4N%d",
+            --   };
+            --
+            --   ---@type string
+            --   local mode = vim.api.nvim_get_mode().mode;
+            --
+            --   for g = 0, 4 do
+            --     ---@type string
+            --     local hl = gr_map[mode] or gr_map.default;
+            --
+            --     table.insert(_o, string.format(hl, g));
+            --   end
+            --
+            --   return _o;
+            --   ---|fE
+            -- end
+          },
+          -- {
+          --   kind = "empty",
+          --   width = 1,
+          --   hl = "LineNr",
+          -- },
+          -- {
+          --   kind = "lnum",
+          --   mode = 2,
+          --
+          --   click = function (_, window)
+          --     return window == vim.api.nvim_get_current_win();
+          --   end,
+          --
+          --   wrap_markers = "│",
+          --   virt_markers = "│",
+          --
+          --   wrap_hl = {
+          --     "Gradient4N0", "Gradient4N0", "Gradient4N1", "Gradient4N1",
+          --     "Gradient4N2", "Gradient4N2", "Gradient4N3", "Gradient4N3",
+          --     "Gradient4N4", "Gradient4N4"
+          --   },
+          --   virt_hl = {
+          --     "Gradient5N0", "Gradient5N0", "Gradient5N1", "Gradient5N1",
+          --     "Gradient5N2", "Gradient5N2", "Gradient5N3", "Gradient5N3",
+          --     "Gradient5N4", "Gradient5N4"
+          --   },
+          --   hl = {
+          --     "StatusColumnBorder",
+          --     "StatusColumnBorder", "StatusColumnBorder", "StatusColumnBorder",
+          --     "StatusColumnBorder", "StatusColumnBorder", "StatusColumnBorder",
+          --   }
+          -- },
+
+          ---|fE
+        }
+      },
+
+      query = {
+        ---|fS
+
+        condition = function (buffer)
+          return vim.bo[buffer].ft == "query" and vim.bo[buffer].bt == "nofile";
+        end,
+
+        components = {
+          {
+            kind = "empty",
+            width = 1,
+            hl = "StatusColumnBorder",
+          },
+        }
+
+        ---|fE
+      }
+    }
+  },
+}
+
+
+
+
+
+
+
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+-- return{
+--   "OXY2DEV/bars.nvim",
+--   opts={
+--     winbar = false, 
+--     statuscolumn = {
+--       default = {
+--         components = {
+--           {
+--             kind = "empty",
+--             width = 1,
+--
+--             hl = "LineNr"
+--           },
+--           -- {
+--           --   kind = "signs",
+--           --   hl = "LineNr",
+--           --   filter = function (_, namespaces, _, _, _, details)
+--           --     local name = namespaces[details.ns_id] or "";
+--           --     return string.match(name, "nvim%.vim%.lsp.+diagnostic%.signs") ~= nil;
+--           --   end
+--           -- },
+--           {
+--             kind = "signs",
+--             hl = "LineNr",
+--
+--             filter = function (_, namespaces, _, _, _, details)
+--               local name = namespaces[details.ns_id] or "";
+--               return string.match(name, "nvim%.vim%.lsp.+diagnostic%.signs") == nil;
+--             end
+--           },
+--           {
+--             kind = "empty",
+--             width = 1,
+--             hl = "LineNr"
+--           },
+--           {
+--             kind = "lnum",
+--             mode = 1,
+--
+--             click = function (_, window)
+--               return window == vim.api.nvim_get_current_win();
+--             end,
+--
+--             wrap_markers = "│",
+--             virt_markers = "│",
+--
+--             wrap_hl = "BarsWrap",
+--             virt_hl = "BarsVirtual",
+--             hl = "LineNr",
+--           },
+--           {
+--             kind = "empty",
+--             width = 1,
+--             hl = "LineNr"
+--           },
+--           -- {
+--           --   kind = "folds",
+--           --
+--           --   close_text = { "󱠂" },
+--           --   close_hl = { "BarsFoldClose1", "BarsFoldClose2", "BarsFoldClose3", "BarsFoldClose4", "BarsFoldClose5", "BarsFoldClose6", },
+--           --   open_text = { "󰌶" },
+--           --   open_hl = { "BarsFoldOpen1", "BarsFoldOpen2", "BarsFoldOpen3", "BarsFoldOpen4", "BarsFoldOpen5", "BarsFoldOpen6", },
+--           --
+--           --   scope_text = "│",
+--           --   scope_end_text = "╰",
+--           --   scope_merge_text = "├",
+--           --
+--           --   fill_text = " ",
+--           --   fill_hl = "LineNr",
+--           --
+--           --   scope_hl = { "BarsFoldOpen1", "BarsFoldOpen2", "BarsFoldOpen3", "BarsFoldOpen4", "BarsFoldOpen5", "BarsFoldOpen6", },
+--           --   scope_end_hl = { "BarsFoldOpen1", "BarsFoldOpen2", "BarsFoldOpen3", "BarsFoldOpen4", "BarsFoldOpen5", "BarsFoldOpen6", },
+--           --   scope_merge_hl = { "BarsFoldOpen1", "BarsFoldOpen2", "BarsFoldOpen3", "BarsFoldOpen4", "BarsFoldOpen5", "BarsFoldOpen6", },
+--           -- },
+--           {
+--             kind = "border",
+--             text = "▍",
+--             hl = "StatusColumnBorder",
+--           },
+--           -- {
+--           --   kind = "empty",
+--           --   width = 1,
+--           --   hl = "Normal"
+--           -- },
+--         }
+--       }
+--     }
+--   },
+-- }
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--

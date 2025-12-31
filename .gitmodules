@@ -1,0 +1,3 @@
+[submodule "extensions/gnome-shell-extension-transparent-window"]
+	path = extensions/gnome-shell-extension-transparent-window
+	url = git@github.com:wytchblade/gnome-shell-extension-transparent-window.git
