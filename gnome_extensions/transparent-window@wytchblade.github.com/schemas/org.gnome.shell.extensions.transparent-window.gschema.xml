@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.transparent-window"
-          path="/org/gnome/shell/extensions/transparent-window/">
-    <key name="toggle-hotkey" type="s">
-      <default>["<Super>F9"]</default>
+  <schema id="org.gnome.shell.extensions.transparent-window" path="/org/gnome/shell/extensions/transparent-window/">
+
+    <key name="toggle-hotkey" type="as">
+      <default>['&lt;Super&gt;0']</default>
       <summary>Hotkey to toggle window transparency</summary>
       <description>Keybinding used to toggle the transparency of the focused window.</description>
     </key>
