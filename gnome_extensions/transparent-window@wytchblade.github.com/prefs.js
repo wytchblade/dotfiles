@@ -12,6 +12,26 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
         });
         window.add(page);
 
+        // --- NEW: Hotkey Settings Group ---
+        const hotkeyGroup = new Adw.PreferencesGroup({
+            title: 'Keyboard Shortcuts',
+            description: 'Configure the hotkey to toggle transparency.',
+        });
+        page.add(hotkeyGroup);
+
+        const hotkeyRow = new Adw.EntryRow({
+            title: 'Toggle Hotkey',
+            text: settings.get_string('toggle-hotkey'),
+        });
+
+        // Update settings when the user finishes typing and presses Enter
+        hotkeyRow.connect('apply', () => {
+            settings.set_string('toggle-hotkey', hotkeyRow.get_text());
+        });
+
+        hotkeyGroup.add(hotkeyRow);
+        // ----------------------------------
+
         // Opacity Settings Group
         const opacityGroup = new Adw.PreferencesGroup({
             title: 'Opacity Settings',
@@ -21,7 +41,7 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
 
         const opacityRow = new Adw.ActionRow({
             title: 'Opacity Level',
-            subtitle: 'Set the default opacity for transparent windows (0% = fully transparent, 100% = fully opaque)',
+            subtitle: 'Set the default opacity (0% - 100%)',
         });
         opacityGroup.add(opacityRow);
 
@@ -35,23 +55,24 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
         });
 
         opacityRow.add_suffix(slider);
-        opacityRow.set_activatable_widget(slider);
 
         // Debug Settings Group
         const debugGroup = new Adw.PreferencesGroup({
             title: 'Debug Settings',
-            description: 'Configure debugging options for troubleshooting.',
         });
         page.add(debugGroup);
 
         const debugRow = new Adw.ActionRow({
             title: 'Debug Mode',
-            subtitle: 'Enable debug logging to console for troubleshooting issues',
+            subtitle: 'Enable debug logging to console',
         });
         debugGroup.add(debugRow);
 
-        const debugSwitch = new Gtk.Switch();
-        debugSwitch.set_active(settings.get_boolean('debug-mode'));
+        const debugSwitch = new Gtk.Switch({
+            active: settings.get_boolean('debug-mode'),
+            valign: Gtk.Align.CENTER,
+        });
+        
         debugSwitch.connect('notify::active', () => {
             settings.set_boolean('debug-mode', debugSwitch.get_active());
         });

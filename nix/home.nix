@@ -95,25 +95,25 @@ margin: -100px;
 		'';
 
 # This targets GTK4/Libadwaita apps
-		gtk4.extraCss = ''
-			headerbar, 
-			headerbar.titlebar {
-				min-height: 0px;
-padding: 0;
-				 margin-top: -100px;
-			}
-
-		/* Target specific Libadwaita child elements to prevent ghost spacing */
-		headerbar windowhandle {
-			min-height: 0px;
-		}
-
-		headerbar windowtitle {
-visibility: hidden;
-opacity: 0;
-		}
-		'';
-	};
+# 		gtk4.extraCss = ''
+# 			headerbar, 
+# 			headerbar.titlebar {
+# 				min-height: 0px;
+# padding: 0;
+# 				 margin-top: -100px;
+# 			}
+#
+# 		/* Target specific Libadwaita child elements to prevent ghost spacing */
+# 		headerbar windowhandle {
+# 			min-height: 0px;
+# 		}
+#
+# 		headerbar windowtitle {
+# visibility: hidden;
+# opacity: 0;
+# 		}
+# 		'';
+# 	};
 
 
 
