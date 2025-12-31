@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import St from 'gi://St';
+import Meta from 'gi://Meta';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -21,14 +22,7 @@ const Indicator = GObject.registerClass({
         });
         this.add_child(this._icon);
         
-        // Connect left-click to toggle transparency
-        this.connect('button-press-event', (actor, event) => {
-            if (event.get_button() === 1) { // Left click
-                this.emit('toggle-transparency');
-                return Clutter.EVENT_STOP;
-            }
-            return Clutter.EVENT_PROPAGATE;
-        });
+        // NOTE: removed the click handler; triggering will be done via keybinding
     }
     
 });
@@ -47,16 +41,43 @@ export default class TransparentWindowExtension extends Extension {
         // Initialize state
         this._originalOpacity = null;
         
-        // Connect toggle signal
+        // Connect toggle signal (keeps the same flow as before)
         this._indicator.connect('toggle-transparency', () => {
             this._toggleWindowTransparency();
         });
+        
+        // Register keybinding (must be declared in your gschema)
+        try {
+            Main.wm.addKeybinding(
+                'toggle-hotkey',           // key name in your schema
+                this._settings,            // Gio.Settings instance
+                Meta.KeyBindingFlags.NONE, // flags
+                () => {                    // handler
+                    if (this._indicator) {
+                        this._indicator.emit('toggle-transparency');
+                    } else {
+                        this._toggleWindowTransparency();
+                    }
+                }
+            );
+            this._debug('TransparentWindow: Keybinding registered (toggle-hotkey)');
+        } catch (e) {
+            this._debug('TransparentWindow: Failed to add keybinding:', e);
+        }
         
         this._debug('TransparentWindow: Extension enabled successfully');
     }
 
     disable() {
         this._debug('TransparentWindow: Disabling extension');
+        
+        // Remove keybinding
+        try {
+            Main.wm.removeKeybinding('toggle-hotkey');
+            this._debug('TransparentWindow: Keybinding removed (toggle-hotkey)');
+        } catch (e) {
+            this._debug('TransparentWindow: Failed to remove keybinding:', e);
+        }
         
         if (this._indicator) {
             this._indicator.destroy();

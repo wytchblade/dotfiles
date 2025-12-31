@@ -150,6 +150,8 @@ environment.variables = {
     ghostty
     tmux
     stow
+    glib
+    pkg-config
     gimp
     inkscape
     gnomeExtensions.advanced-alttab-window-switcher
