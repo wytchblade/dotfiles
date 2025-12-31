@@ -1,6 +1,3 @@
-; [submodule "gnome_extensions/gnome-shell-extension-transparent-window"]
-; 	path = gnome_extensions/gnome-shell-extension-transparent-window
-; 	url = git@github.com:wytchblade/gnome-shell-extension-transparent-window.git
-[submodule "gnome_extensions/transparent-window@pbxdown.github.com"]
-	path = gnome_extensions/transparent-window@pbxdown.github.com
-	url = git@github-wytchblade:wytchblade/gnome-shell-extension-transparent-window.git
+[submodule "gnome_extensions/gnome-shell-extension-transparent-window"]
+	path = gnome_extensions/gnome-shell-extension-transparent-window
+	url = git@github.com:wytchblade/gnome-shell-extension-transparent-window.git

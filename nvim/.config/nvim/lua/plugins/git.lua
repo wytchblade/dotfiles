@@ -15,11 +15,11 @@ return {
           untracked = { text = "┆" },
         },
         signs_staged = {
-          add = { text = "┃" },
-          change = { text = "┃" },
-          delete = { text = "_" },
-          topdelete = { text = "‾" },
-          changedelete = { text = "~" },
+          add = { text = "" },
+          change = { text = "󱍸" },
+          delete = { text = "" },
+          topdelete = { text = "" },
+          changedelete = { text = "󱍸" },
           untracked = { text = "┆" },
         },
         signcolumn = true,
@@ -124,48 +124,48 @@ return {
         desc = "Undo Stage Hunk",
       },
       -- {
-      --   "<leader>Go", require("telescope.builtin").git_status,
-      --   desc = "Open changed file"
-      -- },
-      -- {
-      --   "<leader>Gb", require("telescope.builtin").git_branches,
-      --   desc = "Checkout branch"
-      -- },
-      -- {
-      --   "<leader>Gc", require("telescope.builtin").git_commits,
-      --   desc = "Checkout commit"
-      -- },
-      -- {
-      --   "<leader>GC", require("telescope.builtin").git_bcommits,
-      --   desc = "Checkout commit(for current file)"
-      -- },
-      {
-        "<leader>Gd",
-        function()
-          vim.cmd("Gitsigns diffthis HEAD")
-        end,
-        desc = "Git Diff HEAD",
-      },
-    },
-  },
-  {
-    "sindrets/diffview.nvim",
-    event = "VeryLazy",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-  },
-  -- Git related plugins
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
+        --   "<leader>Go", require("telescope.builtin").git_status,
+        --   desc = "Open changed file"
+        -- },
+        -- {
+          --   "<leader>Gb", require("telescope.builtin").git_branches,
+          --   desc = "Checkout branch"
+          -- },
+          -- {
+            --   "<leader>Gc", require("telescope.builtin").git_commits,
+            --   desc = "Checkout commit"
+            -- },
+            -- {
+              --   "<leader>GC", require("telescope.builtin").git_bcommits,
+              --   desc = "Checkout commit(for current file)"
+              -- },
+              {
+                "<leader>Gd",
+                function()
+                  vim.cmd("Gitsigns diffthis HEAD")
+                end,
+                desc = "Git Diff HEAD",
+              },
+            },
+          },
+          {
+            "sindrets/diffview.nvim",
+            event = "VeryLazy",
+            cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+          },
+          -- Git related plugins
+          "tpope/vim-fugitive",
+          "tpope/vim-rhubarb",
 
-  -- not git, but it's okay
-  {
-    "mbbill/undotree",
-    keys = {
-      {
-        "<leader>GU",
-        ":UndotreeToggle<CR>",
-        desc = "Toggle UndoTree",
-      },
-    },
-  },
-}
+          -- not git, but it's okay
+          {
+            "mbbill/undotree",
+            keys = {
+              {
+                "<leader>GU",
+                ":UndotreeToggle<CR>",
+                desc = "Toggle UndoTree",
+              },
+            },
+          },
+        }
