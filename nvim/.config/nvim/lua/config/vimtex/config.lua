@@ -1,0 +1,16 @@
+-- -- Use Sioyek as the PDF viewer
+-- vim.g.vimtex_view_method = 'sioyek'
+--
+-- -- Define the Sioyek command
+-- vim.g.vimtex_view_general_viewer = 'sioyek'
+--
+-- -- -- How to open the PDF file
+-- -- vim.g.vimtex_view_general_options = [[--reuse-window --execute-command "open_file_at_page @pdf@ @line@" --new-window]]
+-- --
+-- -- -- Optional: configure how forward search is handled
+-- -- vim.g.vimtex_view_general_options_latexmk = [[--reuse-window --execute-command "open_file_at_page @pdf@ @line@" --new-window]]
+-- --
+-- --
+-- --
+-- vim.g.vimtex_view_method = 'sioyek'
+-- vim.g.vimtex_view_sioyek_exe = 'sioyek.exe' -- Or just 'sioyek' if it's in your PATH

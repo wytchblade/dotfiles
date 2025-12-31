@@ -1,0 +1,3 @@
+-- Attaches to a pre-existing tmux session or generates a new session
+local cmd_string = 'vsplit | terminal tmux attach || tmux new-session'
+
