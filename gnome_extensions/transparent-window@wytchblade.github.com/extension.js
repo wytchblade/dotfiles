@@ -50,25 +50,21 @@ export default class TransparentWindowExtension extends Extension {
         const KEYBIND_NAME = 'toggle-hotkey';
         const KEYBIND_STR = '<Alt>8'; // Change this to your preferred shortcut
 
-        // Register the keybinding directly to the display
-        global.display.add_keybinding(
-            KEYBIND_NAME,
-            this._settings,
-            Meta.KeyBindingFlags.NONE,
-            () => {
-                this._toggleWindowTransparency();
-            }
-        );
-
-        // // Manually set the shortcut for the registered name
-        // global.context.get_backend().get_keymap().add_keybinding(
+        // // Register the keybinding directly to the display
+        // global.display.add_keybinding(
         //     KEYBIND_NAME,
-        //     KEYBIND_STR,
+        //     this._settings,
         //     Meta.KeyBindingFlags.NONE,
         //     () => {
         //         this._toggleWindowTransparency();
         //     }
         // );
+
+        Main.wm.addKeybinding("toggle-hotkey",
+          this._settings,
+          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+          this._toggleWindowTransparency.bind(this));
 
         // // Register keybinding (must be declared in your gschema)
         // try {
