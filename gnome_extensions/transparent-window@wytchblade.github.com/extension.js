@@ -46,20 +46,20 @@ export default class TransparentWindowExtension extends Extension {
             this._toggleWindowTransparency();
         });
         
-        // // Hardcoded keybinding configuration
-        // const KEYBIND_NAME = 'toggle-hotkey';
-        // const KEYBIND_STR = '<Super>t'; // Change this to your preferred shortcut
-        //
-        // // Register the keybinding directly to the display
-        // global.display.add_keybinding(
-        //     KEYBIND_NAME,
-        //     new Gio.Settings({ settings_schema: 'org.gnome.shell.keybindings' }), // Dummy settings
-        //     Meta.KeyBindingFlags.NONE,
-        //     () => {
-        //         this._toggleWindowTransparency();
-        //     }
-        // );
-        //
+        // Hardcoded keybinding configuration
+        const KEYBIND_NAME = 'toggle-hotkey';
+        const KEYBIND_STR = '<Alt>8'; // Change this to your preferred shortcut
+
+        // Register the keybinding directly to the display
+        global.display.add_keybinding(
+            KEYBIND_NAME,
+            this._settings,
+            Meta.KeyBindingFlags.NONE,
+            () => {
+                this._toggleWindowTransparency();
+            }
+        );
+
         // // Manually set the shortcut for the registered name
         // global.context.get_backend().get_keymap().add_keybinding(
         //     KEYBIND_NAME,
@@ -71,17 +71,17 @@ export default class TransparentWindowExtension extends Extension {
         // );
 
         // // Register keybinding (must be declared in your gschema)
-        try {
-            Main.wm.addKeybinding(
-                'toggle-hotkey',           // key name in your schema
-                this._settings,            // Gio.Settings instance
-                Meta.KeyBindingFlags.NONE, // flags
-                () => {  this._toggleWindowTransparency(); }
-            );
-            this._debug('TransparentWindow: Keybinding registered (toggle-hotkey)');
-        } catch (e) {
-            this._debug('TransparentWindow: Failed to add keybinding:', e);
-        }
+        // try {
+        //     Main.wm.addKeybinding(
+        //         'toggle-hotkey',           // key name in your schema
+        //         this._settings,            // Gio.Settings instance
+        //         Meta.KeyBindingFlags.NONE, // flags
+        //         () => {  this._toggleWindowTransparency(); }
+        //     );
+        //     this._debug('TransparentWindow: Keybinding registered (toggle-hotkey)');
+        // } catch (e) {
+        //     this._debug('TransparentWindow: Failed to add keybinding:', e);
+        // }
         
         this._debug('TransparentWindow: Extension enabled successfully');
     }
