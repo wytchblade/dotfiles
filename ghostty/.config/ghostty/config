@@ -47,7 +47,7 @@
 theme = Batman
 background = 2b2b2b
 foreground = ff6000
-background-opacity = 0.8
+background-opacity = 1.0
 shell-integration-features = no-cursor
 cursor-color = #ff6000
 cursor-style = block_hollow
