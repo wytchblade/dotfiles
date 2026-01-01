@@ -1,3 +1,4 @@
+import Shell from 'gi://Shell';
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
@@ -46,10 +47,10 @@ export default class TransparentWindowExtension extends Extension {
             this._toggleWindowTransparency();
         });
         
-        // Hardcoded keybinding configuration
-        const KEYBIND_NAME = 'toggle-hotkey';
-        const KEYBIND_STR = '<Alt>8'; // Change this to your preferred shortcut
-
+        // // Hardcoded keybinding configuration
+        // const KEYBIND_NAME = 'toggle-hotkey';
+        // const KEYBIND_STR = '<Alt>8'; // Change this to your preferred shortcut
+        //
         // // Register the keybinding directly to the display
         // global.display.add_keybinding(
         //     KEYBIND_NAME,
