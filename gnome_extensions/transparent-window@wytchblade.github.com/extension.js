@@ -181,8 +181,8 @@ export default class TransparentWindowExtension extends Extension {
         }
         let opacityValue = this._originalOpacity || windowActor.opacity;
 
-        if (Math.min(opacityValue + 20, 255) = 255) {
-          // Do nothing
+        if (Math.min(opacityValue + 20, 255) == 255) {
+          this._debug('TransparentWindow: Maximum opacity reached');
         }else{
           opacityValue = (opacityValue + 20) % 255;
           windowActor.opacity = opacityValue; 
