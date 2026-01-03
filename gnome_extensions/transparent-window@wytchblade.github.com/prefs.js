@@ -15,7 +15,7 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
         // --- NEW: Hotkey Settings Group ---
         const hotkeyGroup = new Adw.PreferencesGroup({
             title: 'Keyboard Shortcuts',
-            description: 'Configure the hotkey to toggle transparency.',
+            description: 'Configure bindings to manipulate transparency.',
         });
         page.add(hotkeyGroup);
 
@@ -24,12 +24,32 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
             text: settings.get_string('toggle-hotkey'),
         });
 
+        const hotkeyRow2 = new Adw.EntryRow({
+            title: 'Increase Opacity',
+            text: settings.get_string('increase-window-opacity'),
+        });
+
+        const hotkeyRow3 = new Adw.EntryRow({
+            title: 'Decrease Opacity',
+            text: settings.get_string('decrease-window-opacity'),
+        });
+
         // Update settings when the user finishes typing and presses Enter
         hotkeyRow.connect('apply', () => {
             settings.set_string('toggle-hotkey', hotkeyRow.get_text());
         });
 
+        hotkeyRow2.connect('apply', () => {
+            settings.set_string('increase-window-opacity', hotkeyRow2.get_text());
+        });
+
+        hotkeyRow3.connect('apply', () => {
+            settings.set_string('decrease-window-opacity', hotkeyRow3.get_text());
+        });
+
         hotkeyGroup.add(hotkeyRow);
+        hotkeyGroup.add(hotkeyRow2);
+        hotkeyGroup.add(hotkeyRow3);
         // ----------------------------------
 
         // Opacity Settings Group

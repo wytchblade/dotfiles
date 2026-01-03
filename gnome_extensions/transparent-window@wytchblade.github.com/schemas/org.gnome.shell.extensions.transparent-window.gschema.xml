@@ -8,6 +8,18 @@
       <description>Keybinding used to toggle the transparency of the focused window.</description>
     </key>
 
+    <key name="increase-window-opacity" type="as">
+      <default><![CDATA[['<Ctrl>+']]]></default>
+      <summary>Hotkey to toggle window transparency</summary>
+      <description>Keybinding used to toggle the transparency of the focused window.</description>
+    </key>
+
+    <key name="decrease-window-opacity" type="as">
+      <default><![CDATA[['<Ctrl>-']]]></default>
+      <summary>Hotkey to toggle window transparency</summary>
+      <description>Keybinding used to toggle the transparency of the focused window.</description>
+    </key>
+
     <key name="opacity-level" type="i">
       <default>50</default>
       <summary>Opacity level (percent)</summary>

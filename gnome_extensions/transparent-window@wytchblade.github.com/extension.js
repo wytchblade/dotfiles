@@ -67,19 +67,47 @@ export default class TransparentWindowExtension extends Extension {
           Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
           this._toggleWindowTransparency.bind(this));
 
+        Main.wm.addKeybinding("increase-window-opacity",
+          this._settings,
+          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+          this._increaseWindowOpacity.bind(this));
+
+        Main.wm.addKeybinding("decrease-window-opacity",
+          this._settings,
+          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+          this._decreaseWindowOpacity.bind(this));
+
+
         // // Register keybinding (must be declared in your gschema)
-        // try {
-        //     Main.wm.addKeybinding(
-        //         'toggle-hotkey',           // key name in your schema
-        //         this._settings,            // Gio.Settings instance
-        //         Meta.KeyBindingFlags.NONE, // flags
-        //         () => {  this._toggleWindowTransparency(); }
-        //     );
-        //     this._debug('TransparentWindow: Keybinding registered (toggle-hotkey)');
-        // } catch (e) {
-        //     this._debug('TransparentWindow: Failed to add keybinding:', e);
-        // }
-        
+        try {
+            Main.wm.addKeybinding(
+                'toggle-hotkey',           // key name in your schema
+                this._settings,            // Gio.Settings instance
+                Meta.KeyBindingFlags.NONE, // flags
+                Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+                this._toggleWindowTransparency.bind(this)
+            );
+
+            Main.wm.addKeybinding("increase-window-opacity",
+              this._settings,
+              Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+              Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+              this._increaseWindowOpacity.bind(this));
+
+            Main.wm.addKeybinding("decrease-window-opacity",
+              this._settings,
+              Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+              Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+              this._decreaseWindowOpacity.bind(this));
+
+            this._debug('TransparentWindow: Keybindings registered (toggle-hotkey, increase-window-opacity, decrease-window-opacity)');
+        } catch (e) {
+            this._debug('TransparentWindow: Failed to add keybinding for (toggle-hotkey, increase-window-opacity, decrease-window-opacity)', e);
+        }
+
+
         this._debug('TransparentWindow: Extension enabled successfully');
     }
 
@@ -89,6 +117,8 @@ export default class TransparentWindowExtension extends Extension {
         // Remove keybinding
         try {
             Main.wm.removeKeybinding('toggle-hotkey');
+            Main.wm.removeKeybinding('increase-window-opacity');
+            Main.wm.removeKeybinding('decrease-window-opacity');
             this._debug('TransparentWindow: Keybinding removed (toggle-hotkey)');
         } catch (e) {
             this._debug('TransparentWindow: Failed to remove keybinding:', e);
@@ -136,6 +166,38 @@ export default class TransparentWindowExtension extends Extension {
             this._debug('TransparentWindow: Made window transparent:', focusWindow.get_title(), 'opacity:', opacityValue, '(' + opacityPercent + '%)');
         }
     }
+
+    _increaseWindowOpacity() {
+        const focusWindow = global.display.get_focus_window();
+        if (!focusWindow) {
+            this._debug('TransparentWindow: No focused window found');
+            return;
+        }
+        
+        const windowActor = focusWindow.get_compositor_private();
+        if (!windowActor) {
+            this._debug('TransparentWindow: No window actor found');
+            return;
+        }
+        windowActor.opacity = (windowActor.opacity + 10) % 255;
+    }
+
+    _decreaseWindowOpacity() {
+        const focusWindow = global.display.get_focus_window();
+        if (!focusWindow) {
+            this._debug('TransparentWindow: No focused window found');
+            return;
+        }
+        
+        const windowActor = focusWindow.get_compositor_private();
+        if (!windowActor) {
+            this._debug('TransparentWindow: No window actor found');
+            return;
+        }
+        windowActor.opacity = (windowActor.opacity - 10) % 255;
+    }
+
+
     
     _debug(...args) {
         if (this._settings && this._settings.get_boolean('debug-mode')) {
