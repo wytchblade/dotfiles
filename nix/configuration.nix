@@ -151,7 +151,7 @@ environment.variables = {
     tmux
     stow
     glib
-    element-web
+    element-desktop
     pkg-config
     gimp
     inkscape

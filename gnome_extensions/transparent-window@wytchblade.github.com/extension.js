@@ -180,8 +180,13 @@ export default class TransparentWindowExtension extends Extension {
             return;
         }
         let opacityValue = this._originalOpacity || windowActor.opacity;
-        opacityValue = (opacityValue + 10) % 255;
-        windowActor.opacity = opacityValue; 
+
+        if (Math.min(opacityValue + 20, 255) = 255) {
+          // Do nothing
+        }else{
+          opacityValue = (opacityValue + 20) % 255;
+          windowActor.opacity = opacityValue; 
+        }
     }
 
     _decreaseWindowOpacity() {
@@ -197,7 +202,7 @@ export default class TransparentWindowExtension extends Extension {
             return;
         }
         let opacityValue = this._originalOpacity || windowActor.opacity;
-        opacityValue = (opacityValue - 10) % 255;
+        opacityValue = (opacityValue - 20) % 255;
         windowActor.opacity = opacityValue; 
     }
 
