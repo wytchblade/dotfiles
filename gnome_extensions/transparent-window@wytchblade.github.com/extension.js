@@ -63,19 +63,19 @@ export default class TransparentWindowExtension extends Extension {
 
         Main.wm.addKeybinding("toggle-hotkey",
           this._settings,
-          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Meta.KeyBindingFlags.NONE,
           Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
           this._toggleWindowTransparency.bind(this));
 
         Main.wm.addKeybinding("increase-window-opacity",
           this._settings,
-          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Meta.KeyBindingFlags.NONE,
           Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
           this._increaseWindowOpacity.bind(this));
 
         Main.wm.addKeybinding("decrease-window-opacity",
           this._settings,
-          Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+          Meta.KeyBindingFlags.NONE,
           Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
           this._decreaseWindowOpacity.bind(this));
 
@@ -179,7 +179,9 @@ export default class TransparentWindowExtension extends Extension {
             this._debug('TransparentWindow: No window actor found');
             return;
         }
-        windowActor.opacity = (windowActor.opacity + 10) % 255;
+        let opacityValue = this._originalOpacity || windowActor.opacity;
+        opacityValue = (opacityValue + 10) % 255;
+        windowActor.opacity = opacityValue; 
     }
 
     _decreaseWindowOpacity() {
@@ -194,11 +196,13 @@ export default class TransparentWindowExtension extends Extension {
             this._debug('TransparentWindow: No window actor found');
             return;
         }
-        windowActor.opacity = (windowActor.opacity - 10) % 255;
+        let opacityValue = this._originalOpacity || windowActor.opacity;
+        opacityValue = (opacityValue - 10) % 255;
+        windowActor.opacity = opacityValue; 
     }
 
 
-    
+
     _debug(...args) {
         if (this._settings && this._settings.get_boolean('debug-mode')) {
             console.log(...args);
