@@ -198,7 +198,7 @@ export default class TransparentWindowExtension extends Extension {
         if (this.cycleState==true) {
           const ticker = setInterval(() => {
             console.log("TransparentWindow: Cycling window opacity...");
-            let counter = windowActor.opacity;
+            let counter = 255;
             const STEP = 20;
             const MAX = 255;
             const RANGE = MAX * 2;
