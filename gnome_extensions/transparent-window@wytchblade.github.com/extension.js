@@ -41,6 +41,8 @@ export default class TransparentWindowExtension extends Extension {
         
         // Initialize state
         this._originalOpacity = null;
+        this.cycleState = 0;
+        this.cycleFrequency = 1000;
         
         // Connect toggle signal (keeps the same flow as before)
         this._indicator.connect('toggle-transparency', () => {
@@ -85,9 +87,9 @@ export default class TransparentWindowExtension extends Extension {
             Main.wm.addKeybinding(
                 'toggle-hotkey',           // key name in your schema
                 this._settings,            // Gio.Settings instance
-                Meta.KeyBindingFlags.NONE, // flags
+                Meta.KeyBindingFlags.TRIGGER_RELEASE, // flags
                 Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
-                this._toggleWindowTransparency.bind(this)
+                this._cycleWindowOpacity.bind(this)
             );
 
             Main.wm.addKeybinding("increase-window-opacity",
@@ -130,6 +132,9 @@ export default class TransparentWindowExtension extends Extension {
         }
         
         this._settings = null;
+        // Remove the cycleState and cycleFrequency variable
+        this.cycleState = null;
+        this.cycleFrequency = null;
         
         this._debug('TransparentWindow: Extension disabled successfully');
     }
@@ -206,6 +211,53 @@ export default class TransparentWindowExtension extends Extension {
         windowActor.opacity = opacityValue; 
     }
 
+
+    _cycleWindowOpacity() {
+        const focusWindow = global.display.get_focus_window();
+        if (!focusWindow) {
+            this._debug('TransparentWindow: No focused window found');
+            return;
+        }
+        
+        const windowActor = focusWindow.get_compositor_private();
+        if (!windowActor) {
+            this._debug('TransparentWindow: No window actor found');
+            return;
+        }
+
+        // Invert the cycleState variable to toggle the opacity cycler
+        this.cycleState = !this.cycleState; 
+
+        if (this.cycleState) {
+          const ticker = setInterval(() => {
+            console.log("TransparentWindow: Cycling window opacity...");
+            let counter = 0;
+            const STEP = 5;
+            const MAX = 255;
+            const RANGE = MAX * 2;
+
+            counter += STEP;
+
+
+              // 2. Use modulo to wrap the value between 0 and 510
+              let relativeValue = counter % RANGE;
+
+              // 3. The "Folding" Math:
+              // If relativeValue is 0-255, result is just relativeValue.
+              // If relativeValue is 256-510, result is (510 - relativeValue).
+              let finalValue = relativeValue > MAX 
+                ? RANGE - relativeValue 
+                : relativeValue;
+              
+              windowActor.opacity = finalValue;
+              
+
+          }, this.cycleFrequency); // 1000ms = 1 second
+        }else{
+          clearInterval(ticker);
+        }
+
+    }
 
 
     _debug(...args) {
