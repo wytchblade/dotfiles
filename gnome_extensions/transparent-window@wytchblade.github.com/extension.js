@@ -41,53 +41,20 @@ export default class TransparentWindowExtension extends Extension {
         
         // Initialize state
         this._originalOpacity = null;
-        this.cycleState = 0;
+        this.cycleState = false;
         this.cycleFrequency = 1000;
         
         // Connect toggle signal (keeps the same flow as before)
         this._indicator.connect('toggle-transparency', () => {
             this._toggleWindowTransparency();
         });
-        
-        // // Hardcoded keybinding configuration
-        // const KEYBIND_NAME = 'toggle-hotkey';
-        // const KEYBIND_STR = '<Alt>8'; // Change this to your preferred shortcut
-        //
-        // // Register the keybinding directly to the display
-        // global.display.add_keybinding(
-        //     KEYBIND_NAME,
-        //     this._settings,
-        //     Meta.KeyBindingFlags.NONE,
-        //     () => {
-        //         this._toggleWindowTransparency();
-        //     }
-        // );
-
-        Main.wm.addKeybinding("toggle-hotkey",
-          this._settings,
-          Meta.KeyBindingFlags.NONE,
-          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
-          this._toggleWindowTransparency.bind(this));
-
-        Main.wm.addKeybinding("increase-window-opacity",
-          this._settings,
-          Meta.KeyBindingFlags.NONE,
-          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
-          this._increaseWindowOpacity.bind(this));
-
-        Main.wm.addKeybinding("decrease-window-opacity",
-          this._settings,
-          Meta.KeyBindingFlags.NONE,
-          Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
-          this._decreaseWindowOpacity.bind(this));
-
 
         // // Register keybinding (must be declared in your gschema)
         try {
             Main.wm.addKeybinding(
                 'toggle-hotkey',           // key name in your schema
                 this._settings,            // Gio.Settings instance
-                Meta.KeyBindingFlags.TRIGGER_RELEASE, // flags
+                Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
                 Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
                 this._cycleWindowOpacity.bind(this)
             );
@@ -228,11 +195,11 @@ export default class TransparentWindowExtension extends Extension {
         // Invert the cycleState variable to toggle the opacity cycler
         this.cycleState = !this.cycleState; 
 
-        if (this.cycleState) {
+        if (this.cycleState==true) {
           const ticker = setInterval(() => {
             console.log("TransparentWindow: Cycling window opacity...");
-            let counter = 0;
-            const STEP = 5;
+            let counter = windowActor.opacity;
+            const STEP = 20;
             const MAX = 255;
             const RANGE = MAX * 2;
 
@@ -252,7 +219,7 @@ export default class TransparentWindowExtension extends Extension {
               windowActor.opacity = finalValue;
               
 
-          }, this.cycleFrequency); // 1000ms = 1 second
+          }, 1000); // 1000ms = 1 second
         }else{
           clearInterval(ticker);
         }
