@@ -44,7 +44,7 @@ eval "$(zoxide init bash)"
 # source /home/firebat/.config/broot/launcher/bash/br
 # Function to return the size of the git repo
 gc(){
-  git commit -m "|.git| = $(du - .git | awk '{print $1}')"
+  git commit -m "|.git| = $(du -s .git | awk '{print $1}')"
 } 
 
 
