@@ -44,8 +44,8 @@ export default class TransparentWindowExtension extends Extension {
         this._cycleState = false;
         this._cycleFrequency = 1000;
         this._counter = 255;
-        this._STEP = 10;
-        this._MAX = 280;
+        this._STEP = 20;
+        this._MAX = 350;
         this._RANGE = this._MAX * 2;
 
         // Create global ticker. The _useGlobaclTicker function accesses this variable to manipulate a ticker "singleton" the preserves state across windows
@@ -61,7 +61,7 @@ export default class TransparentWindowExtension extends Extension {
             Main.wm.addKeybinding(
                 'toggle-hotkey',           // key name in your schema
                 this._settings,            // Gio.Settings instance
-                Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+                Meta.KeyBindingFlags.IGNORE_AUTOREPEAT | Meta.KeyBindingFlags.TRIGGER_RELEASE,
                 Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
                 this._cycleWindowOpacity.bind(this)
             );
