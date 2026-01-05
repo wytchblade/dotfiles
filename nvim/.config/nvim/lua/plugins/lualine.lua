@@ -15,6 +15,24 @@ local function get_file_size()
   return size .. 'B'
 end
 
+-- A Lua function to fetch the number of buffers currently open in the nvim instance.o
+local function get_buffer_count()
+  local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
+
+  local emoji_map = {
+    [1] = " 󰲠 ",
+    [2] = " 󰲢 ",
+    [3] = " 󰲤 ",
+    [4] = "🛠️"
+  }
+
+  return emoji_map[buffers]
+end
+
+
+
+
+
 -- A Lua function to fetch the current Git branch name of the repository
 -- containing the current buffer's file.
 local function get_git_branch()
@@ -143,7 +161,7 @@ return {
         lualine_c = { filename },
         lualine_x = {  },
         lualine_y = { 'searchcount'},
-        lualine_z = {get_file_size, 'location', 'progress' },
+        lualine_z = { get_buffer_count, get_file_size, 'location', 'progress' },
       },
       inactive_sections = {
         lualine_a = {},

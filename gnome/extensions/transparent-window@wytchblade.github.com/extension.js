@@ -41,12 +41,16 @@ export default class TransparentWindowExtension extends Extension {
         
         // Initialize state variables
         this._originalOpacity = null;
+        // used to toggle the cycleState variable when the toggle-hotkey is pressed
         this._cycleState = false;
+        // used to increment the opacity value, default is 255
         this._counter = 255;
         this._STEP = 10;
         // Added a slight buffer over 255 to allow a longer time to release at full opacity
         this._MAX = 300;
+        // used to set the range for the modulo operation, which enabled the transparency pinp-pong effect in conjunction with the modulo division when used with a ternary operator
         this._RANGE = this._MAX * 2;
+        // used to set the delta between window opacity changes, default is 10
         this._cycleRate = this._settings.get_int('cycle-rate');
 
         // Create global ticker. The _useGlobaclTicker function accesses this variable to manipulate a ticker "singleton" the preserves state across windows
