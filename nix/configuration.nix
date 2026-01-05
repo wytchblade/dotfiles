@@ -268,8 +268,8 @@ environment.variables = {
 
   # This ensures the gnome user desktop uses your layout every time you boot, and gdm uses the same layout
   systemd.tmpfiles.rules = [
-    "L+ /home/wytchblade/.config/monitors.xml - - - - ${../gnome/monitors.xml}"
-    "L+ /run/gdm/.config/monitors.xml - - - - ${../gnome/monitors.xml}"
+    "L+ /home/wytchblade/.config/monitors.xml - - - - ${../gnome/monitor_configuration.xml}"
+    "L+ /run/gdm/.config/monitors.xml - - - - ${../gnome/monitor_configuration.xml}"
   ];
 
 
