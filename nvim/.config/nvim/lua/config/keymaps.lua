@@ -48,8 +48,8 @@ map("n", "<Left>", ":bprevious<CR>", opts)
 
 -- Panes resizing
 map("n", "+", ":vertical resize +5<CR>")
--- map("n", "_", ":vertical resize -5<CR>")
--- map("n", "=", ":resize +5<CR>")
+map("n", "_", ":vertical resize -5<CR>")
+map("n", "=", ":resize +5<CR>")
 map("n", "-", ":resize -5<CR>")
 
 -- Map enter to ciw in normal mode

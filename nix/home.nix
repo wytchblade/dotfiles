@@ -140,8 +140,19 @@
 		"org/gnome/desktop/wm/keybindings" = {
 				switch-to-workspace-left = [ "<Alt>h" ];
 				switch-to-workspace-right = [ "<Alt>l" ];
+				# snapping windows to the left/right sides
+				move-to-side-w = [ "<Control><Alt>h" ];
+				move-to-side-e = [ "<Control><Alt>l" ];
 				
-				# Optional: If you also want to MOVE windows with Alt+Shift+H/L
+				# maximize and unmaximize
+				maximize = [ "<Control><Alt>k" ];
+				unmaximize = [ "<Control><Alt>j" ];
+
+				# Moving windows between monitors
+				move-to-monitor-up = [ "<Shift><Alt>k" ];
+				move-to-monitor-down = [ "<Shift><Alt>j" ];
+						
+				# move windows to the left/right workspaces
 				move-to-workspace-left = [ "<Shift><Alt>h" ];
 				move-to-workspace-right = [ "<Shift><Alt>l" ];
 			};
