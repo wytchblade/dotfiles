@@ -244,13 +244,13 @@ end, { noremap = true, silent = true, desc = "Exact word search (prompt)" })
 
 
 
--- replaces general past with "put"
-map('n', 'p', function()
+-- paste one line below with "put"
+map('n', '<C-p>', function()
   vim.cmd('put')
 end, { desc = 'put' })
 
--- replaces general past with "0put"
-map('n', 'P', function()
+-- paste one line above with "0put"
+map('n', '<C-M-p>', function()
   vim.cmd('.-1put')
 end, { desc = 'put' })
 
