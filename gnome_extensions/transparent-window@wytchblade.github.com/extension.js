@@ -43,7 +43,7 @@ export default class TransparentWindowExtension extends Extension {
         this._originalOpacity = null;
         this._cycleState = false;
         this._counter = 255;
-        this._STEP = 1;
+        this._STEP = 10;
         // Added a slight buffer over 255 to allow a longer time to release at full opacity
         this._MAX = 300;
         this._RANGE = this._MAX * 2;

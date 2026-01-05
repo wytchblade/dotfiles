@@ -162,6 +162,7 @@ environment.variables = {
     lua-language-server
     ripgrep
     fd
+    telegram-desktop
     gcc 
     mangohud
     protonup-qt

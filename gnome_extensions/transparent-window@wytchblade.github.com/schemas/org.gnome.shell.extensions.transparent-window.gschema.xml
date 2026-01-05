@@ -27,7 +27,7 @@
     </key>
 
     <key name="cycle-rate" type="i">
-      <default>50</default>
+      <default>100</default>
       <summary>Cycle Rate</summary>
       <description>Cycle speed when opacity hotkey is held</description>
     </key>
