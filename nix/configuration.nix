@@ -266,15 +266,12 @@ environment.variables = {
 # Install firefox.
   programs.firefox.enable = true;
 
-  # This ensures the gnome user desktop uses your layout every time you boot
+  # This ensures the gnome user desktop uses your layout every time you boot, and gdm uses the same layout
   systemd.tmpfiles.rules = [
     "L+ /home/wytchblade/.config/monitors.xml - - - - ${../gnome/monitors.xml}"
-  ];
-
-  # This ensures gdm uses your layout every time you boot
-  systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${../gnome/monitors.xml}"
   ];
+
 
 # Some programs need SUID wrappers, can be configured further or are
 # started in user sessions.
