@@ -47,6 +47,7 @@ export default class TransparentWindowExtension extends Extension {
         // Added a slight buffer over 255 to allow a longer time to release at full opacity
         this._MAX = 300;
         this._RANGE = this._MAX * 2;
+        this._cycleRate = this._settings.get_int('cycle-rate');
 
         // Create global ticker. The _useGlobaclTicker function accesses this variable to manipulate a ticker "singleton" the preserves state across windows
         this._globalTicker = null;
@@ -108,7 +109,7 @@ export default class TransparentWindowExtension extends Extension {
         this._settings = null;
         // Remove the cycleState and cycleFrequency variable
         this._cycleState = null;
-        this._cycleFrequency = null;
+        this._cycleRate = null;
         this._globalTicker = null;
         this._counter = null;
         this._STEP = null;
@@ -154,7 +155,7 @@ export default class TransparentWindowExtension extends Extension {
               windowActor.opacity = finalValue;
               
 
-          }, this._settings.get_int('cycle-rate')); // 1000ms = 1 second
+          }, this._cycleRate); // 1000ms = 1 second
         }else{
           console.log("TransparentWindow: Stopping window opacity cycler...");
           clearInterval(this._globalTicker);
