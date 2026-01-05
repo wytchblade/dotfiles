@@ -82,7 +82,7 @@ export default class TransparentWindowPreferences extends ExtensionPreferences {
         });
         opacityGroup.add(cycleRow);
 
-        const cycleSlider = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1);
+        const cycleSlider = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 3000, 1);
         cycleSlider.set_hexpand(true);
         cycleSlider.set_draw_value(true);
         cycleSlider.set_value(settings.get_int('cycle-rate'));
