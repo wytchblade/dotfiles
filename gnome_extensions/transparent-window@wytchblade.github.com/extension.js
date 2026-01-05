@@ -43,6 +43,10 @@ export default class TransparentWindowExtension extends Extension {
         this._originalOpacity = null;
         this._cycleState = false;
         this._cycleFrequency = 1000;
+        this._counter = 255;
+        this._STEP = 20;
+        this._MAX = 255;
+        this._RANGE = this._MAX * 2;
 
         // Create global ticker. The _useGlobaclTicker function accesses this variable to manipulate a ticker "singleton" the preserves state across windows
         this._globalTicker = null;
@@ -106,6 +110,10 @@ export default class TransparentWindowExtension extends Extension {
         this._cycleState = null;
         this._cycleFrequency = null;
         this._globalTicker = null;
+        this._counter = null;
+        this._STEP = null;
+        this._MAX = null;
+        this._RANGE = null;
         
         this._debug('TransparentWindow: Extension disabled successfully');
     }
@@ -129,22 +137,18 @@ export default class TransparentWindowExtension extends Extension {
         if (this.cycleState==true) {
            this._globalTicker = setInterval(() => {
             console.log("TransparentWindow: Cycling window opacity...");
-            let counter = 255;
-            const STEP = 20;
-            const MAX = 255;
-            const RANGE = MAX * 2;
 
-            counter += STEP;
+            this._counter += this._STEP;
 
 
               // 2. Use modulo to wrap the value between 0 and 510
-              let relativeValue = counter % RANGE;
+              let relativeValue = this._counter % this._RANGE;
 
               // 3. The "Folding" Math:
               // If relativeValue is 0-255, result is just relativeValue.
               // If relativeValue is 256-510, result is (510 - relativeValue).
-              let finalValue = relativeValue > MAX 
-                ? RANGE - relativeValue 
+              let finalValue = relativeValue > this._MAX
+                ? this._RANGE - relativeValue 
                 : relativeValue;
 
 
