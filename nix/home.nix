@@ -23,14 +23,14 @@
 	home.file.".local/share/icons" = {
 		enable = true;
 		recursive = true;
-		source = ../assets/gnome_icon_pack;
+		source = ../gnome/icon_themes;
 	};
 
 # config for GNOME extensions built from source
 	home.file.".local/share/gnome-shell/extensions" = {
 		enable = true;
 		recursive = true;
-		source = ../gnome_extensions;
+		source = ../gnome/extensions;
 	};
 
 # Symlink gnome-shell-extension-transparent-window to .local/share/gnome-shell/extensions

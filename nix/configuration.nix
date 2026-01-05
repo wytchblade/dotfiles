@@ -266,6 +266,11 @@ environment.variables = {
 # Install firefox.
   programs.firefox.enable = true;
 
+  # This ensures GNOME uses your layout every time you boot
+  systemd.tmpfiles.rules = [
+    "L+ /home/wytchblade/.config/monitors.xml - - - - ${../gnome/monitors.xml}"
+  ];
+
 # Some programs need SUID wrappers, can be configured further or are
 # started in user sessions.
 # programs.mtr.enable = true;
