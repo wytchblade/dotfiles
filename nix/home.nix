@@ -157,6 +157,11 @@
 				move-to-workspace-right = [ "<Shift><Alt>l" ];
 			};
 
+		# disable the default lock shortcut
+		"org/gnome/settings-daemon/plugins/media-keys" = {
+			screensaver = [ "" ];
+		};
+
 
 
 	};
