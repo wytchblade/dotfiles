@@ -141,8 +141,8 @@
 				switch-to-workspace-left = [ "<Alt>h" ];
 				switch-to-workspace-right = [ "<Alt>l" ];
 				# snapping windows to the left/right sides
-				move-to-side-w = [ "<Control><Alt>h" ];
-				move-to-side-e = [ "<Control><Alt>l" ];
+				toggle-tiled-left = [ "<Control><Alt>h" ];
+				toggle-tiled-right = [ "<Control><Alt>l" ];
 				
 				# maximize and unmaximize
 				maximize = [ "<Control><Alt>k" ];
