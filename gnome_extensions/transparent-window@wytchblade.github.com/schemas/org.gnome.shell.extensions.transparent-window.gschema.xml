@@ -26,6 +26,12 @@
       <description>Transparency level when making a window transparent (0-100).</description>
     </key>
 
+    <key name="cycle-rate" type="i">
+      <default>50</default>
+      <summary>Cycle Rate</summary>
+      <description>Cycle speed when opacity hotkey is held</description>
+    </key>
+
     <key name="debug-mode" type="b">
       <default>false</default>
       <summary>Enable debug logging</summary>
