@@ -15,20 +15,28 @@ local function get_file_size()
   return size .. 'B'
 end
 
--- A Lua function to fetch the number of buffers currently open in the nvim instance.o
+-- A Lua function to fetch the number of buffers currently open in the nvim instance.
 local function get_buffer_count()
   local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
 
   local emoji_map = {
-    [1] = " 󰲠 ",
-    [2] = " 󰲢 ",
-    [3] = " 󰲤 ",
-    [4] = "🛠️"
+    [1] = " 󰲠 ", [2] = " 󰲢 ", [3] = " 󰲤 ",
+    [4] = " 󰲦 ", [5] = " 󰲨 ", [6] = " 󰲪 ",
+    [7] = " 󰲬 ", [8] = " 󰲮 ", [9] = " 󰲰 "
   }
 
-  return emoji_map[buffers]
-end
+  local display
 
+  if buffers > 0 and buffers < 10 then
+    display = emoji_map[buffers]
+  elseif buffers >= 10 then
+    display = " 󰲲 " -- Icon for "10+"
+  else
+    display = "   " -- Icon for 0 or error
+  end
+
+  return display
+end
 
 
 
@@ -159,9 +167,9 @@ return {
         lualine_a = {mode, get_git_branch, diagnostics},
         lualine_b = {{ 'filetype', cond = hide_in_width }, diff},
         lualine_c = { filename },
-        lualine_x = {  },
+        lualine_x = { get_buffer_count},
         lualine_y = { 'searchcount'},
-        lualine_z = { get_buffer_count, get_file_size, 'location', 'progress' },
+        lualine_z = { {get_file_size, cond = hide_in_width}, {'location', cond = hide_in_width}, 'progress' },
       },
       inactive_sections = {
         lualine_a = {},
