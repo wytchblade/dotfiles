@@ -148,6 +148,9 @@ environment.variables = {
     discord
     julia-bin
     ghostty
+    libGL
+    libxkbcommon
+    wayland
     tmux
     stow
     glib
