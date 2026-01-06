@@ -61,7 +61,7 @@ export default class TransparentWindowExtension extends Extension {
         //     this._toggleWindowTransparency();
         // });
 
-        // // Register keybinding (must be declared in your gschema)
+        // Register keybinding (must be declared in your gschema)
         try {
             Main.wm.addKeybinding(
                 'toggle-hotkey',           // key name in your schema

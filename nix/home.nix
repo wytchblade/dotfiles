@@ -130,7 +130,7 @@
 				pkgs.gnomeExtensions.desktop-clock.extensionUuid
 				pkgs.gnomeExtensions.just-perfection.extensionUuid
 				# Custom extensions can be added like so
-				"transparent-window@wytchblade.github.com"
+				"transparent-window@pbxqdown.github.com"
 			];
 		};
 		"org/gnome/desktop/interface" = {
