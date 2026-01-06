@@ -3,6 +3,17 @@ return {
   lazy = false,
   branch = 'main',
   build = ':TSUpdate',
+  opts = {
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<CR>",
+        node_incremental = "<CR>",
+        scope_incremental = false, -- Set to false if you don't want to use it
+        node_decremental = "<BS>",
+      },
+    },
+  },
   config = function()
     local ts = require('nvim-treesitter')
 
