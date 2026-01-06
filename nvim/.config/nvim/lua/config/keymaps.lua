@@ -201,14 +201,14 @@ map('n', '<M-e>', open_oil, { desc = 'open oil' })
 -- GenX code
 
 -- Smart expand/init
-map({'n', 'v'}, '<CR>', function()
-  local mode = vim.fn.mode()
-  if mode == 'n' then
-    vim.cmd("lua require'nvim-treesitter.incremental_selection'.init_selection()")
-  else
-    vim.cmd("lua require'nvim-treesitter.incremental_selection'.node_incremental()")
-  end
-end, { desc = 'Init or expand Treesitter selection' })
+-- map({'n', 'v'}, '<CR>', function()
+--   local mode = vim.fn.mode()
+--   if mode == 'n' then
+--     vim.cmd("lua require'nvim-treesitter.incremental_selection'.init_selection()")
+--   else
+--     vim.cmd("lua require'nvim-treesitter.incremental_selection'.node_incremental()")
+--   end
+-- end, { desc = 'Init or expand Treesitter selection' })
 
 -- Shrink
 map('v', '<BS>', function()
