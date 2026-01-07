@@ -261,8 +261,8 @@ end
 map('n', '<C-BS>', 'diw', { noremap = true, silent = true })
 
 --  Move blocks horizontally (left/right)
-vim.keymap.set('v', '<S-h>', ':MoveHBlock(-1)<CR>', opts)
-vim.keymap.set('v', '<S-l>', ':MoveHBlock(1)<CR>', opts)
+vim.keymap.set('v', '<C-h>', ':MoveHBlock(-1)<CR>', opts)
+vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
 
 -- Keep cursor centered when scrolling
 map("n", "<C-d>", "<C-d>zz", opts)
