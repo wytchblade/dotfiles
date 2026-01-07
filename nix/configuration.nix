@@ -16,10 +16,14 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.wytchblade = import ./home.nix;
+
+  # Enables graphics acceleration 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
+  # OpenCL support using the ROCM runtime library can be enabled via the amdgpu module.
+  hardware.amdgpu.opencl.enable = true;
 
 
   # Bootloader.
