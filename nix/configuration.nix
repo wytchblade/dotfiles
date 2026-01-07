@@ -11,6 +11,25 @@
       inputs.home-manager.nixosModules.home-manager
     ];
 
+  # Sets up a shim that places a compatible linker where unpatched binaries are expected to be (/lib64/...). Additionally, it sets up the environment variables NIX_LD and NIX_LD_LIBRARY_PATH 
+  programs.nix-ld.enable = true;
+  # Attempt to get OpenGL support
+  programs.nix-ld.libraries = with pkgs; [
+    # The core OpenGL library
+    libGL
+    
+    # Common dependencies for hardware accelerated apps
+    libxkbcommon
+    wayland
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXrandr
+    
+    # Often required alongside OpenGL for audio and compression
+    alsa-lib
+    zlib
+  ];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
