@@ -155,6 +155,9 @@
 				# move windows to the left/right workspaces
 				move-to-workspace-left = [ "<Shift><Alt>h" ];
 				move-to-workspace-right = [ "<Shift><Alt>l" ];
+
+				# Pin window to all workspaces
+				toggle-on-all-workspaces = [ "<Control><Alt>j" ];
 			};
 
 		# disable the default lock shortcut
