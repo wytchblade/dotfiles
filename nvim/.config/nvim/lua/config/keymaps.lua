@@ -265,4 +265,8 @@ local function save_cwd_to_file()
   vim.cmd("qa")
 end
 
+-- Delete word using CTRL+BKSPC
+map('n', '<C-BS>', 'diw', { noremap = true, silent = true })
+
+-- Open directory in terminal from oil buffer
 map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })
