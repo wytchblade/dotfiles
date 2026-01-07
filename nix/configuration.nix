@@ -16,7 +16,10 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.wytchblade = import ./home.nix;
-
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
 
   # Bootloader.
