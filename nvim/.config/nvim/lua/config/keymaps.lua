@@ -268,5 +268,9 @@ end
 -- Delete word using CTRL+BKSPC
 map('n', '<C-BS>', 'diw', { noremap = true, silent = true })
 
+--  Move blocks horizontally (left/right)
+vim.keymap.set('v', '<C-h>', ':MoveHBlock(-1)<CR>', opts)
+vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
+
 -- Open directory in terminal from oil buffer
 map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })

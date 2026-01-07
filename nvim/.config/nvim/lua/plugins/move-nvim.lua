@@ -9,10 +9,10 @@ return {
     { "<C-b>", ":MoveWord(-1)<CR>", mode = { "n" }, desc = "Move Word Left" },
     { "<C-w>", ":MoveWord(1)<CR>", mode = { "n" }, desc = "Move Word Right" },
     -- Visual Mode
-    { "<C-k>", ":MoveBlock(1)<CR>", mode = { "v" }, desc = "Move Block Up" },
-    { "<C-j>", ":MoveBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Down" },
-    { "<C-h>", ":MoveHBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Left" },
-    { "<C-l>", ":MoveHBlock(1)<CR>", mode = { "v" }, desc = "Move Block Right" },
+    { "<C-j>", ":MoveBlock(1)<CR>", mode = { "v" }, desc = "Move Block Up" },
+    { "<C-k>", ":MoveBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Down" },
+    -- { "<C-h>", ":MoveHBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Left" },
+    -- { "<C-l>", ":MoveHBlock(1)<CR>", mode = { "v" }, desc = "Move Block Right" },
   },
   opts = {
     line = {
@@ -21,10 +21,10 @@ return {
     },
     block = {
       enable = true, -- Enables block movement
-      indent = false  -- Toggles indentation
+      indent = true  -- Toggles indentation
     },
     word = {
-      enable = true, -- Enables word movement
+      enable = false, -- Enables word movement
     },
     char = {
       enable = false -- Enables char movement
