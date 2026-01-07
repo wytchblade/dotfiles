@@ -1,16 +1,17 @@
 return {
   "fedepujol/move.nvim",
+  lazy = false,
   keys = {
     -- Normal Mode
     -- { "<A-j>", ":MoveLine(1)<CR>", desc = "Move Line Up" },
     -- { "<A-k>", ":MoveLine(-1)<CR>", desc = "Move Line Down" },
     -- { "<A-h>", ":MoveHChar(-1)<CR>", desc = "Move Character Left" },
     -- { "<A-l>", ":MoveHChar(1)<CR>", desc = "Move Character Right" },
-    { "<C-b>", ":MoveWord(-1)<CR>", mode = { "n" }, desc = "Move Word Left" },
-    { "<C-w>", ":MoveWord(1)<CR>", mode = { "n" }, desc = "Move Word Right" },
+    -- { "<C-b>", ":MoveWord(-1)<CR>", mode = { "n" }, desc = "Move Word Left" },
+    -- { "<C-w>", ":MoveWord(1)<CR>", mode = { "n" }, desc = "Move Word Right" },
     -- Visual Mode
-    { "<C-j>", ":MoveBlock(1)<CR>", mode = { "v" }, desc = "Move Block Up" },
-    { "<C-k>", ":MoveBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Down" },
+    -- { "<C-j>", ":MoveBlock(1)<CR>", mode = { "v" }, desc = "Move Block Up" },
+    -- { "<C-k>", ":MoveBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Down" },
     -- { "<C-h>", ":MoveHBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Left" },
     -- { "<C-l>", ":MoveHBlock(1)<CR>", mode = { "v" }, desc = "Move Block Right" },
   },
