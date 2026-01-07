@@ -16,17 +16,6 @@ return {
   },
   config = function()
     local ts = require('nvim-treesitter')
-    require("nvim-treesitter.configs").setup({
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          node_decremental = "<BS>",
-          scope_incremental = false,
-        },
-      },
-    })
 
     -- State tracking for async parser loading
     local parsers_loaded = {}
