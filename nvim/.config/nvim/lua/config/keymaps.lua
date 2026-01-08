@@ -26,17 +26,13 @@ map("n", "YY", "va{Vy", opts)
 -- map("n", "j", "gj", opts)
 -- map("n", "k", "gk", opts)
 
--- Exit on jj and jk
-map("i", "jj", "<ESC>", opts)
-map("i", "jk", "<ESC>", opts)
-
 -- Move to start/end of line
 map({ "n", "x", "o" }, "H", "^", opts)
 map({ "n", "x", "o" }, "L", "g_", opts)
 
 -- Navigate buffers
-map("n", "<Right>", ":bnext<CR>", opts)
-map("n", "<Left>", ":bprevious<CR>", opts)
+map("n", "<leader><C-l>", ":bnext<CR>", opts)
+map("n", "<leader><C-h>", ":bprevious<CR>", opts)
 
 -- Panes resizing
 map("n", "+", ":vertical resize +5<CR>")
@@ -187,40 +183,6 @@ end
 -- map('n', '<M-e>', open_broot, { desc = 'open broot' })
 map('n', '<M-e>', open_oil, { desc = 'open oil' })
 
-
-
-
--- GenX code
-
--- Smart expand/init
--- map({'n', 'v'}, '<CR>', function()
---   local mode = vim.fn.mode()
---   if mode == 'n' then
---     vim.cmd("lua require'nvim-treesitter.incremental_selection'.init_selection()")
---   else
---     vim.cmd("lua require'nvim-treesitter.incremental_selection'.node_incremental()")
---   end
--- end, { desc = 'Init or expand Treesitter selection' })
-
--- Shrink
-map('v', '<BS>', function()
-  vim.cmd("lua require'nvim-treesitter.incremental_selection'.node_decremental()")
-end, { desc = 'Shrink Treesitter selection' })
-
-
-map('n', '<C-l>', function()
-  vim.cmd("bnext")
-end, { desc = 'Shrink Treesitter selection' })
-
-map('n', '<C-h>', function()
-  vim.cmd("bprevious")
-end, { desc = 'Shrink Treesitter selection' })
-
-
-map('n', '<M-o>', function()
-  vim.cmd("Oil")
-end, { desc = 'Oil Explorer' })
-
 -- Simple exact-word search on Shift+S
 vim.keymap.set("n", "S", function()
   local q = vim.fn.input("Regex Pattern: \\< ...\\>")
@@ -234,8 +196,6 @@ vim.keymap.set("n", "S", function()
   vim.o.hlsearch = true
 end, { noremap = true, silent = true, desc = "Exact word search (prompt)" })
 
-
-
 -- paste one line below with "put"
 map('n', '<C-p>', function()
   vim.cmd('put')
@@ -246,7 +206,7 @@ map('n', '<C-M-p>', function()
   vim.cmd('.-1put')
 end, { desc = 'put' })
 
-
+-- required function for poening directories in terminal from oil
 local function save_cwd_to_file()
   local cwd = require("oil").get_current_dir()
   local file = io.open(os.getenv("TMPDIR") .. "/.nvim_last_dir", "w")
@@ -256,6 +216,9 @@ local function save_cwd_to_file()
   end
   vim.cmd("qa")
 end
+
+-- Open directory in terminal from oil buffer
+map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })
 
 -- Delete word using CTRL+BKSPC
 map('n', '<C-BS>', 'diw', { noremap = true, silent = true })
@@ -274,12 +237,14 @@ map("n", "<C-u>", "<C-u>zz", opts)
 -- map("v", "K", ":m '<-2<CR>gv=gv", opts)
 -- vim.keymap.set('v', '<C-j>', ':MoveBlock(1)<CR>', opts)
 
--- Open directory in terminal from oil buffer
-map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })
-
-
 -- nvim-gomove bindings
 map( "x", "<C-h>", "<Plug>GoVMBlockLeft", {} )
 map( "x", "<C-j>", "<Plug>GoVMBlockDown", {} )
 map( "x", "<C-k>", "<Plug>GoVMBlockUp", {} )
 map( "x", "<C-l>", "<Plug>GoVMBlockRight", {} )
+
+map( "n", "<C-j>", "<Plug>GoNMLineDown", {} )
+map( "n", "<C-k>", "<Plug>GoNMLineUp", {} )
+map( "n", "<C-h>", "<Plug>GoNMLineLeft", {} )
+map( "n", "<C-l>", "<Plug>GoNMLineRight", {} )
+
