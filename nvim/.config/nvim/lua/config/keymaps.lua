@@ -30,9 +30,9 @@ map("n", "YY", "va{Vy", opts)
 map({ "n", "x", "o" }, "H", "^", opts)
 map({ "n", "x", "o" }, "L", "g_", opts)
 
--- Navigate buffers
-map("n", "<leader>j", ":bnext<CR>", opts)
-map("n", "<leader>k", ":bprevious<CR>", opts)
+-- Navigate buffers and center cursor
+map("n", "<leader>l", ":bnext<CR>zz", opts)
+map("n", "<leader>h", ":bprevious<CR>zz", opts)
 
 -- Panes resizing
 map("n", "+", ":vertical resize +5<CR>")
