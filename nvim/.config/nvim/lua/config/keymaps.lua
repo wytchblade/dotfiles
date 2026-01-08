@@ -1,3 +1,5 @@
+-- Add 'nowait' so it fires immediately even if other maps exist
+-- local opts = { noremap = true, silent = true, nowait = true }
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
 
