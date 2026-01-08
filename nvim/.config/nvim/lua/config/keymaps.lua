@@ -31,8 +31,9 @@ map({ "n", "x", "o" }, "H", "^", opts)
 map({ "n", "x", "o" }, "L", "g_", opts)
 
 -- Navigate buffers and center cursor
-map("n", "<leader>l", ":bnext<CR>zz", opts)
-map("n", "<leader>h", ":bprevious<CR>zz", opts)
+-- Add 'nowait' so it fires immediately even if other maps exist
+map("n", "<leader>l", ":bnext<CR>zz", { noremap = true, silent = true, nowait = true })
+map("n", "<leader>k", ":bprevious<CR>zz", opts)
 
 -- Panes resizing
 map("n", "+", ":vertical resize +5<CR>")
