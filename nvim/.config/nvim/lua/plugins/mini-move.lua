@@ -1,4 +1,5 @@
 return {
+  lazy = false,
   'nvim-mini/mini.nvim', version = false,
   opts = {
     mappings = {
