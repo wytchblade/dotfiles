@@ -1,5 +1,5 @@
 return {
-  'nvim-mini/mini.nvim', version = false
+  'nvim-mini/mini.nvim', version = false,
   opts = {
     -- add default mappings
     mappings = true,
