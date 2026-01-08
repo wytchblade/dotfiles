@@ -119,6 +119,7 @@
 
 	home.packages = with pkgs; [
 		gnomeExtensions.dash-to-panel
+		gnomeExtensions.highlight-focus
 	];
 
 	dconf.settings = {
@@ -127,6 +128,7 @@
 			enabled-extensions = [
 				pkgs.gnomeExtensions.dash-to-panel.extensionUuid
 				pkgs.gnomeExtensions.advanced-alttab-window-switcher.extensionUuid
+				pkgs.gnomeExtensions.highlight-focus.extensionUuid
 				pkgs.gnomeExtensions.desktop-clock.extensionUuid
 				pkgs.gnomeExtensions.just-perfection.extensionUuid
 				# Custom extensions can be added like so
