@@ -261,8 +261,8 @@ end
 map('n', '<C-BS>', 'diw', { noremap = true, silent = true })
 
 --  Move blocks horizontally (left/right)
-vim.keymap.set('v', '<C-h>', ':MoveHBlock(-1)<CR>', opts)
-vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
+-- vim.keymap.set('v', '<C-h>', ':MoveHBlock(-1)<CR>', opts)
+-- vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
 
 -- Keep cursor centered when scrolling
 map("n", "<C-d>", "<C-d>zz", opts)
@@ -270,9 +270,9 @@ map("n", "<C-u>", "<C-u>zz", opts)
 
 -- Move selected line / block of text in visual mode
 -- map("v", "J", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set('v', '<C-k>', ':MoveBlock(-1)<CR>', opts)
+-- vim.keymap.set('v', '<C-k>', ':MoveBlock(-1)<CR>', opts)
 -- map("v", "K", ":m '<-2<CR>gv=gv", opts)
-vim.keymap.set('v', '<C-j>', ':MoveBlock(1)<CR>', opts)
+-- vim.keymap.set('v', '<C-j>', ':MoveBlock(1)<CR>', opts)
 
 -- Open directory in terminal from oil buffer
 map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })

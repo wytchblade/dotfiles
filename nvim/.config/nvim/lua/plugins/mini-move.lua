@@ -1,13 +1,18 @@
 return {
   'nvim-mini/mini.nvim', version = false,
   opts = {
-    -- add default mappings
-    mappings = true,
-    -- add default motions
-    motions = true,
-    -- add default operators
-    operators = true,
-    -- add default text objects
-    text_objects = true,
+    mappings = {
+      -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+      left = '<C-h>',
+      right = '<C-l>',
+      down = '<C-j>',
+      up = '<C-k>',
+
+      -- Move current line in Normal mode
+      line_left = '<C-h>',
+      line_right = '<C-l>',
+      line_down = '<C-j>',
+      line_up = '<C-k>',
+    },
   },
 }
