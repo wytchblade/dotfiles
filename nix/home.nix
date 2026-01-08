@@ -120,6 +120,7 @@
 	home.packages = with pkgs; [
 		gnomeExtensions.dash-to-panel
 		gnomeExtensions.highlight-focus
+		gnomeExtensions.vitals
 	];
 
 	dconf.settings = {
@@ -127,6 +128,7 @@
 			disable-user-extensions = false;
 			enabled-extensions = [
 				pkgs.gnomeExtensions.dash-to-panel.extensionUuid
+				pkgs.gnomeExtensions.vitals.extensionUuid
 				pkgs.gnomeExtensions.advanced-alttab-window-switcher.extensionUuid
 				pkgs.gnomeExtensions.highlight-focus.extensionUuid
 				pkgs.gnomeExtensions.desktop-clock.extensionUuid
