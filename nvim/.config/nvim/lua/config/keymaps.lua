@@ -279,7 +279,7 @@ map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })
 
 
 -- nvim-gomove bindings
-map( "x", "<C-h>", "<Plug>GoVSDLeft", {} )
-map( "x", "<C-j>", "<Plug>GoVSDDown", {} )
-map( "x", "<C-k>", "<Plug>GoVSDUp", {} )
-map( "x", "<C-l>", "<Plug>GoVSDRight", {} )
+map( "x", "<C-h>", "<Plug>GoVMBlockLeft", {} )
+map( "x", "<C-j>", "<Plug>GoVMBlockDown", {} )
+map( "x", "<C-k>", "<Plug>GoVMBlockUp", {} )
+map( "x", "<C-l>", "<Plug>GoVMBlockRight", {} )
