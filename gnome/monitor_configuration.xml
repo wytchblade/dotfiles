@@ -3,24 +3,6 @@
     <layoutmode>physical</layoutmode>
     <logicalmonitor>
       <x>0</x>
-      <y>1080</y>
-      <scale>1</scale>
-      <monitor>
-        <monitorspec>
-          <connector>DP-1</connector>
-          <vendor>UGD</vendor>
-          <product>Artist 12    </product>
-          <serial>0x20240122</serial>
-        </monitorspec>
-        <mode>
-          <width>1920</width>
-          <height>1080</height>
-          <rate>60.027</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-    <logicalmonitor>
-      <x>0</x>
       <y>0</y>
       <scale>1</scale>
       <primary>yes</primary>
@@ -35,6 +17,24 @@
           <width>1920</width>
           <height>1080</height>
           <rate>60.000</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>0</x>
+      <y>1080</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>UGD</vendor>
+          <product>MD140FH</product>
+          <serial>0x00000000</serial>
+        </monitorspec>
+        <mode>
+          <width>1920</width>
+          <height>1200</height>
+          <rate>59.950</rate>
         </mode>
       </monitor>
     </logicalmonitor>
