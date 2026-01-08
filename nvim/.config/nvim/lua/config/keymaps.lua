@@ -276,3 +276,10 @@ map("n", "<C-u>", "<C-u>zz", opts)
 
 -- Open directory in terminal from oil buffer
 map('n', '<leader>cd', save_cwd_to_file, { desc = '[oil]: open directory' })
+
+
+-- nvim-gomove bindings
+map( "x", "<C-h>", "<Plug>GoVSDLeft", {} )
+map( "x", "<C-j>", "<Plug>GoVSDDown", {} )
+map( "x", "<C-k>", "<Plug>GoVSDUp", {} )
+map( "x", "<C-l>", "<Plug>GoVSDRight", {} )
