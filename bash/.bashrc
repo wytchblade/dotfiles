@@ -35,14 +35,17 @@ reverse_tree(){
     # Skip empty strings (happens at the start of absolute paths)
     if [[ -n "${ADDR[$i]}" ]]; then
       # Print the tree branch and the directory name
-      echo "${prefix}└──⍿:${ADDR[$i]}"
+      echo "${prefix}╰──${ADDR[$i]}"
       # Add indentation for each level 
       prefix+="   "
     fi
   done
 }
 
-export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
+# export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
+
+# export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
+export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n\[\e[0m\]$(reverse_tree)\[\e[38;2;255;96;0m\]- '
 
 export EDITOR="nvim"
 export TMPDIR=/tmp
