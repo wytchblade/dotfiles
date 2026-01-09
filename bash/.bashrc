@@ -61,7 +61,7 @@ reverse_tree(){
       rev_idx=$(( last_idx - i ))
 
       # Print the tree branch, name, and the reverse index
-      echo "${prefix}└──${ADDR[$i]} ($rev_idx)"
+      echo -e "\e[34m${prefix}└──${ADDR[$i]}\e[0m ($rev_idx)"
       
       # Add indentation for each level 
       prefix+="   "
