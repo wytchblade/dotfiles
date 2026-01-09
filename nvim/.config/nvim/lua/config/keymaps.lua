@@ -245,9 +245,11 @@ map("n", "<C-u>", "<C-u>zz", opts)
 map( "x", "<C-h>", "<Plug>GoVMBlockLeft", {} )
 map( "x", "<C-j>", "<Plug>GoVMBlockDown", {} )
 map( "x", "<C-k>", "<Plug>GoVMBlockUp", {} )
-map( "x", "<J>", "<Plug>GoNVLineDown", {} )
-map( "x", "<K>", "<Plug>GoNVLineUp", {} )
 map( "x", "<C-l>", "<Plug>GoVMBlockRight", {} )
+
+-- Move selected line down (J)) and up (K)
+map("v", "J", ":m '>+1<CR>gv=gv", opts)
+map("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 map( "n", "<C-j>", "<Plug>GoNMLineDown", {} )
 map( "n", "<C-k>", "<Plug>GoNMLineUp", {} )

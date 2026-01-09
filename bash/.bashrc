@@ -5,9 +5,10 @@ parse_git_branch() {
   local branch=$(git branch --show-current 2> /dev/null)
   if [ -n "$branch" ]; then
     echo "≼ $branch "
+  else
+    echo "∅ "
   fi
 }
-
 
 # Function to format the directory into a staircase
     # Replace slashes with a newline and the decorative "tree" character
@@ -96,9 +97,14 @@ bind '"\ee": "nvoil\n"'
 # Initializes the edit-and-execute-command keybind
 bind '"\C-e": edit-and-execute-command'
 
-# Executes neovim function to allow for writing to /tmp after opening an oil directory. 
+# Executes custom neovim function to allow for writing to /tmp after opening an oil directory. 
 bind '"\e\r": "nv\n"'
 
+# Bind F1 to "cd .." followed by Enter (\n)
+bind '"\eOP":"cd ..\n"'
+
+# Bind F2 to "cd ../.." followed by Enter (\n)
+bind '"\eOQ":"cd ../..\n"'
 
 alias bpy='/home/firebat/python_3.11/python'
 alias bpy_venv='source /home/firebat/bpy_venv/bin/activate'
