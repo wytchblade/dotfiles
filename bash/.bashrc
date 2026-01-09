@@ -74,6 +74,17 @@ bind '"\e\r": "nv\n"'
 alias bpy='/home/firebat/python_3.11/python'
 alias bpy_venv='source /home/firebat/bpy_venv/bin/activate'
 
+# tree view aliases
+alias t1='tree -L 1'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+alias t4='tree -L 4'
+alias t5='tree -L 5'
+alias t6='tree -L 6'
+alias t7='tree -L 7'
+alias t8='tree -L 8'
+alias t9='tree -L 9'
+
 
 # Advanced fzf finder using fzf and find. Toggles between a directory find and a file find. Uses process substitution to permit asynchronous piping to the fzf output (which may result in delays in finding the target file if the directory is large). Also supports toggling search depth via CTRL+<INTEGER>. Will copy the selected directory or filename to clipboard using wl-copy
 ff() {
@@ -115,7 +126,27 @@ benv() {
   source /home/firebat/venv_3.11/bin/activate
 }
 
+reverse_tree(){
+  path=$(pwd)
 
+  # Split the path into an array based on the "/" delimiter
+  IFS='/' read -ra ADDR <<< "$path"
+
+  # Handle the root directory case
+  echo "/"
+  prefix=""
+
+  # Iterate through the parts of the path
+  for i in "${!ADDR[@]}"; do
+    # Skip empty strings (happens at the start of absolute paths)
+    if [[ -n "${ADDR[$i]}" ]]; then
+      # Add indentation for each level
+      prefix+="  "
+      # Print the tree branch and the directory name
+      echo "${prefix}└── ${ADDR[$i]}"
+    fi
+  done
+}
 
 # fl() {
 #     local selected_dir
