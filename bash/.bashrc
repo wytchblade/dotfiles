@@ -131,22 +131,22 @@ reverse_tree(){
 
   # Split the path into an array based on the "/" delimiter
   IFS='/' read -ra ADDR <<< "$path"
-  TEE = "├── "  
-  LAST = "└── " 
-  LINE = "│   " 
+  # TEE = "├── "  
+  # LAST = "└── " 
+  # LINE = "│   " 
 
   # Handle the root directory case
-  echo "├──/"
+  # echo "├──/"
   prefix=""
 
   # Iterate through the parts of the path
   for i in "${!ADDR[@]}"; do
     # Skip empty strings (happens at the start of absolute paths)
     if [[ -n "${ADDR[$i]}" ]]; then
-      # Add indentation for each level
-      prefix+="├──"
       # Print the tree branch and the directory name
-      echo "${prefix}├──${ADDR[$i]}"
+      echo "${prefix}└──${ADDR[$i]}"
+      # Add indentation for each level 
+      prefix+="    "
     fi
   done
 }

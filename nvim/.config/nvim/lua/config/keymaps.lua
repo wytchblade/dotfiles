@@ -245,6 +245,8 @@ map("n", "<C-u>", "<C-u>zz", opts)
 map( "x", "<C-h>", "<Plug>GoVMBlockLeft", {} )
 map( "x", "<C-j>", "<Plug>GoVMBlockDown", {} )
 map( "x", "<C-k>", "<Plug>GoVMBlockUp", {} )
+map( "x", "<J>", "<Plug>GoNVLineDown", {} )
+map( "x", "<K>", "<Plug>GoNVLineUp", {} )
 map( "x", "<C-l>", "<Plug>GoVMBlockRight", {} )
 
 map( "n", "<C-j>", "<Plug>GoNMLineDown", {} )
