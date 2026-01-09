@@ -4,7 +4,7 @@
 parse_git_branch() {
   local branch=$(git branch --show-current 2> /dev/null)
   if [ -n "$branch" ]; then
-    echo "≼ $branch"
+    echo "≼ $branch "
   fi
 }
 
@@ -45,7 +45,7 @@ reverse_tree(){
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
 
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
-export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n\[\e[0m\]$(reverse_tree)\[\e[38;2;255;96;0m\]- '
+export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
 
 export EDITOR="nvim"
 export TMPDIR=/tmp
