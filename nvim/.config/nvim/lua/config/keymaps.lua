@@ -255,5 +255,3 @@ map( "n", "<C-j>", "<Plug>GoNMLineDown", {} )
 map( "n", "<C-k>", "<Plug>GoNMLineUp", {} )
 map( "n", "<C-h>", "<Plug>GoNMLineLeft", {} )
 map( "n", "<C-l>", "<Plug>GoNMLineRight", {} )
-
-map("n", "s", function() require("flash").jump() end, { noremap = true, silent = true, nowait = true })
