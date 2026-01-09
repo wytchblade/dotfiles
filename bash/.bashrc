@@ -16,7 +16,33 @@ parse_git_branch() {
     echo "$PWD" | sed "s|/|/\n├──|g"
 }
 
-export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(format_staircase_path)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
+# Function to generate a reverse tree from pwd up to root
+reverse_tree(){
+  path=$(pwd)
+
+  # Split the path into an array based on the "/" delimiter
+  IFS='/' read -ra ADDR <<< "$path"
+  # TEE = "├── "  
+  # LAST = "└── " 
+  # LINE = "│   " 
+
+  # Handle the root directory case
+  # echo "├──/"
+  prefix=""
+
+  # Iterate through the parts of the path
+  for i in "${!ADDR[@]}"; do
+    # Skip empty strings (happens at the start of absolute paths)
+    if [[ -n "${ADDR[$i]}" ]]; then
+      # Print the tree branch and the directory name
+      echo "${prefix}└──⍿:${ADDR[$i]}"
+      # Add indentation for each level 
+      prefix+="   "
+    fi
+  done
+}
+
+export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
 
 export EDITOR="nvim"
 export TMPDIR=/tmp
@@ -126,30 +152,6 @@ benv() {
   source /home/firebat/venv_3.11/bin/activate
 }
 
-reverse_tree(){
-  path=$(pwd)
-
-  # Split the path into an array based on the "/" delimiter
-  IFS='/' read -ra ADDR <<< "$path"
-  # TEE = "├── "  
-  # LAST = "└── " 
-  # LINE = "│   " 
-
-  # Handle the root directory case
-  # echo "├──/"
-  prefix=""
-
-  # Iterate through the parts of the path
-  for i in "${!ADDR[@]}"; do
-    # Skip empty strings (happens at the start of absolute paths)
-    if [[ -n "${ADDR[$i]}" ]]; then
-      # Print the tree branch and the directory name
-      echo "${prefix}└──${ADDR[$i]}"
-      # Add indentation for each level 
-      prefix+="    "
-    fi
-  done
-}
 
 # fl() {
 #     local selected_dir
