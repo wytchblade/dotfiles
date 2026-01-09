@@ -18,25 +18,51 @@ parse_git_branch() {
 }
 
 # Function to generate a reverse tree from pwd up to root
+# reverse_tree(){
+#   path=$(pwd)
+#
+#   # Split the path into an array based on the "/" delimiter
+#   IFS='/' read -ra ADDR <<< "$path"
+#   # TEE = "├── "  
+#   # LAST = "└── " 
+#   # LINE = "│   " 
+#
+#   # Handle the root directory case
+#   # echo "├──/"
+#   prefix=""
+#
+#   # Iterate through the parts of the path
+#   for i in "${!ADDR[@]}"; do
+#     # Skip empty strings (happens at the start of absolute paths)
+#     if [[ -n "${ADDR[$i]}" ]]; then
+#       # Print the tree branch and the directory name
+#       echo "${prefix}└──${ADDR[$i]}"
+#       # Add indentation for each level 
+#       prefix+="   "
+#     fi
+#   done
+# }
+
 reverse_tree(){
   path=$(pwd)
 
   # Split the path into an array based on the "/" delimiter
   IFS='/' read -ra ADDR <<< "$path"
-  # TEE = "├── "  
-  # LAST = "└── " 
-  # LINE = "│   " 
-
-  # Handle the root directory case
-  # echo "├──/"
+  
+  # Calculate the index of the last element
+  last_idx=$(( ${#ADDR[@]} - 1 ))
   prefix=""
 
   # Iterate through the parts of the path
   for i in "${!ADDR[@]}"; do
     # Skip empty strings (happens at the start of absolute paths)
     if [[ -n "${ADDR[$i]}" ]]; then
-      # Print the tree branch and the directory name
-      echo "${prefix}╰──${ADDR[$i]}"
+      # Calculate reverse index: current directory is 0, parent is 1, etc.
+      rev_idx=$(( last_idx - i ))
+
+      # Print the tree branch, name, and the reverse index
+      echo "${prefix}└──${ADDR[$i]} ($rev_idx)"
+      
       # Add indentation for each level 
       prefix+="   "
     fi
@@ -46,7 +72,7 @@ reverse_tree(){
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
 
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
-export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
+export PS1='\[\e[38;2;255;96;0m\]┌──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\] '
 
 export EDITOR="nvim"
 export TMPDIR=/tmp
@@ -100,11 +126,12 @@ bind '"\C-e": edit-and-execute-command'
 # Executes custom neovim function to allow for writing to /tmp after opening an oil directory. 
 bind '"\e\r": "nv\n"'
 
-# Bind F1 to "cd .." followed by Enter (\n)
+# Bind F keys to associated repetitions of "cd .." followed by Enter (\n)
 bind '"\eOP":"cd ..\n"'
-
-# Bind F2 to "cd ../.." followed by Enter (\n)
 bind '"\eOQ":"cd ../..\n"'
+bind '"\eOR":"cd ../../..\n"'
+bind '"\eOS":"cd ../../../..\n"'
+bind '"\e[15~":"cd ../../../../..\n"'
 
 alias bpy='/home/firebat/python_3.11/python'
 alias bpy_venv='source /home/firebat/bpy_venv/bin/activate'

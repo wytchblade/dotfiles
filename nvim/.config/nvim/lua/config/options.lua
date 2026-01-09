@@ -238,3 +238,7 @@ require("monoglow").setup({
     colors.glow = "#fd1b7c"
   end
 })
+
+
+-- Sets the virtualedit option to block, which permits unobstructed block-wise visual mode (moves past end of line). Change to "all" if all modes are intended to be supported in this way
+vim.opt.virtualedit = "block"
