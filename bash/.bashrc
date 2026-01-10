@@ -1,10 +1,15 @@
 # ~/.bashrc
 #
 
+# Define Colors
+BLUE='\e[34m'
+BOLD_ORANGE='\e[1;38;5;208m'
+RESET='\e[0m'
+
 parse_git_branch() {
   local branch=$(git branch --show-current 2> /dev/null)
   if [ -n "$branch" ]; then
-    echo "≼ $branch "
+    echo " $branch "
   else
     echo "∅ "
   fi
@@ -46,6 +51,10 @@ parse_git_branch() {
 reverse_tree(){
   path=$(pwd)
 
+  # 1. Define the emoji array (Index 0 to 10)
+  # Index 0 is the current dir, 1 is parent, etc.
+  emojis=("" "󱊫" "󱊬" "󱊭" "󱊮" "󱊯" "󱊰" "󱊱" "󱊲" "󱊳")
+
   # Split the path into an array based on the "/" delimiter
   IFS='/' read -ra ADDR <<< "$path"
   
@@ -55,13 +64,22 @@ reverse_tree(){
 
   # Iterate through the parts of the path
   for i in "${!ADDR[@]}"; do
-    # Skip empty strings (happens at the start of absolute paths)
+    # Skip empty strings
     if [[ -n "${ADDR[$i]}" ]]; then
-      # Calculate reverse index: current directory is 0, parent is 1, etc.
+      # Calculate reverse index
       rev_idx=$(( last_idx - i ))
 
-      # Print the tree branch, name, and the reverse index
-      echo -e "\e[34m${prefix}└──${ADDR[$i]}\e[0m ($rev_idx)"
+      # 2. Determine which label to show
+      if [[ $rev_idx -lt ${#emojis[@]} ]]; then
+        label="${emojis[$rev_idx]}"
+      else
+        label=""
+      fi
+
+      # 3. Print the tree branch, name, and the emoji label
+      # echo -e "\e[34m${prefix}╰─$label:${ADDR[$i]}\e[0m "
+      # echo -e "\e[34m${prefix}╰─\e[38;5;208m$label\e[34m:${ADDR[$i]}\e[0m"
+      echo -e "${BLUE}${prefix}╰─${BOLD_ORANGE}${label}${RESET}${BLUE}:${ADDR[$i]}${RESET}"
       
       # Add indentation for each level 
       prefix+="   "
@@ -72,7 +90,7 @@ reverse_tree(){
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch) \[\e[38;5;245m\]@ \t$(reverse_tree)/\n\[\e[38;2;255;96;0m\]╰─\[\e[38;2;255;96;0m\]\[\e[0m\] '
 
 # export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]- '
-export PS1='\[\e[38;2;255;96;0m\]┌──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\] '
+export PS1='\[\e[38;2;255;96;0m\]╭──(\[\e[1;32m\]\u\[\e[0m\]) $(parse_git_branch)\[\e[38;5;245m\]󱑆 \t\n$(reverse_tree)\[\e[38;2;255;96;0m\]: '
 
 export EDITOR="nvim"
 export TMPDIR=/tmp

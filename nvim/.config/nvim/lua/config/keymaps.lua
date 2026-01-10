@@ -255,3 +255,5 @@ map( "n", "<C-j>", "<Plug>GoNMLineDown", {} )
 map( "n", "<C-k>", "<Plug>GoNMLineUp", {} )
 map( "n", "<C-h>", "<Plug>GoNMLineLeft", {} )
 map( "n", "<C-l>", "<Plug>GoNMLineRight", {} )
+
+vim.keymap.set({ "n", "x", "o" }, "f", "<CMD>lua require('flash').jump()<CR>", { desc = "Flash Jump" })

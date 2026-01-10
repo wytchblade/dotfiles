@@ -108,7 +108,7 @@ return {
       modes = {
         search = {enabled = true},
         char = {
-          enabled = true, -- enable Flash for f/F/t/T
+          enabled = false, -- enable Flash for f/F/t/T
           jump_labels = true, -- show labels on matches
         },
       },
@@ -119,7 +119,7 @@ return {
       -- { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "f", mode = { "n" },           function() require("flash").jump() end,            desc = "Flash Jump" },
+      -- { "<M-s>", mode = { "n" },           function() require("flash").jump() end,            desc = "Flash Jump" },
     },
   },
 

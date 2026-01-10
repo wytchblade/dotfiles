@@ -25,3 +25,5 @@
 
 ## Delete two words backwards (inclusive, the command without v is exclusive)
 dv2b
+
+## The flash.nvim plugin has been implemented to replace the f key with the flash jump plugin. Values are maintained in the extra.lua file
